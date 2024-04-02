@@ -12,4 +12,4 @@ export const getUnitFromSearchParams = (
   } else if (params.has('mi')) {
     return 'mi';
   }
-}
+};
