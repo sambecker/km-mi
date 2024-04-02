@@ -1,3 +1,4 @@
+import { parseTimeString } from '@/utility/number';
 import { ReadonlyURLSearchParams } from 'next/navigation';
 
 const KM_MI_CONVERSION = 0.621371;
@@ -56,7 +57,7 @@ export const generateValuesFromKm = (
 ) => ({
   ...current,
   km,
-  mi: km ? convertKmToMi(parseFloat(km)).toString() : undefined,
+  mi: km ? convertKmToMi(parseTimeString(km)).toString() : undefined,
 });
 
 export const generateValuesFromMi = (
@@ -65,5 +66,5 @@ export const generateValuesFromMi = (
 ) => ({
   ...current,
   mi,
-  km: mi ? convertMiToKm(parseFloat(mi)).toString() : undefined,
+  km: mi ? convertMiToKm(parseTimeString(mi)).toString() : undefined,
 });

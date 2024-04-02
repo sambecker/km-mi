@@ -29,9 +29,7 @@ export default function RootLayout({
             'flex w-full items-center justify-center h-[100vh]',
             'text-8xl font-bold',
           )}>
-            <div className="translate-y-[-1rem] space-y-4">
-              {children}
-            </div>
+            {children}
           </div>
         </main>
       </body>
