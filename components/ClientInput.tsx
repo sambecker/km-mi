@@ -20,5 +20,5 @@ export default function ClientInput({
       onChange={e =>
         router.push(`/?${path}=${e.target.value || '0'}`, { scroll: false })}
     />
-  )
+  );
 }

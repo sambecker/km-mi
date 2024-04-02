@@ -18,5 +18,5 @@ export default function ClientInputs() {
         value={mi === '0' ? '' : mi}
       />
     </div>
-  )
+  );
 }

@@ -1,17 +1,17 @@
-import ClientInputs from "@/components/ClientInputs";
-import ClientHeader from "@/components/ClientHeader";
-import { Suspense } from "react";
-import { twMerge } from "tailwind-merge";
-import AppStateProvider from "@/state/AppStateProvider";
+import ClientInputs from '@/components/ClientInputs';
+import ClientHeader from '@/components/ClientHeader';
+import { Suspense } from 'react';
+import { twMerge } from 'tailwind-merge';
+import AppStateProvider from '@/state/AppStateProvider';
 
 export default function Home() {
   return (
     <AppStateProvider>
       <main>
         <div className={twMerge(
-            'flex w-full items-center justify-center h-[100vh]',
-            'text-8xl font-bold',
-          )}>
+          'flex w-full items-center justify-center h-[100vh]',
+          'text-8xl font-bold',
+        )}>
           <div className="translate-y-[-1rem] space-y-4">
             <Suspense>
               <ClientHeader />
