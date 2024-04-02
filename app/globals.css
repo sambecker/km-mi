@@ -18,7 +18,6 @@
       rounded-md border
       border-gray-800
       focus:border-gray-50
-      placeholder:text-sm placeholder:translate-y-[-3px]
-      placeholder:text-gray-600
+      placeholder:text-gray-800
   }
 }

@@ -2,49 +2,33 @@ import {
   convertSecondsToTimeString,
   convertTimeStringToSeconds,
 } from '@/utility/number';
-import { ReadonlyURLSearchParams } from 'next/navigation';
 
 const KM_MI_CONVERSION = 1.60934;
 const MI_KM_CONVERSION = 0.621371;
 
 export type Unit = 'km' | 'mi';
 
-export type UnitValues = Record<Unit, string | undefined>;
+export type UnitValues = Partial<Record<Unit, string>>;
 
 const INITIAL_VALUES: UnitValues = { km: '', mi: '' };
 
-export const pathForKm = (km?: string) =>
-  km ? `/km/${km}` : '/';
+const convertKmToMi = (km: number) => km * KM_MI_CONVERSION;
 
-export const pathForMi = (mi?: string) =>
-  mi ? `/mi/${mi}` : '/';
+const convertMiToKm = (mi: number) => mi * MI_KM_CONVERSION;
 
-export const getUnitFromSearchParams = (
-  params: ReadonlyURLSearchParams,
-): Unit | undefined => {
-  if (params.has('km')) {
-    return 'km';
-  } else if (params.has('mi')) {
-    return 'mi';
-  }
+const convertKmStringToMiString = (km: string) => {
+  const time = convertTimeStringToSeconds(km);
+  return !isNaN(time)
+    ? convertSecondsToTimeString(convertKmToMi(time))
+    : '';
 };
 
-export const getValuesFromSearchParams = (
-  params: ReadonlyURLSearchParams,
-): UnitValues => ({
-  km: params.get('km') ?? undefined,
-  mi: params.get('mi') ?? undefined,
-});
-
-const convertKmToMi = (km: number): number => km * KM_MI_CONVERSION;
-
-const convertMiToKm = (mi: number): number => mi * MI_KM_CONVERSION;
-
-const convertKmStringToMiString = (km: string): string =>
-  convertSecondsToTimeString(convertKmToMi(convertTimeStringToSeconds(km)));
-
-const convertMiStringToKmString = (mi: string): string =>
-  convertSecondsToTimeString(convertMiToKm(convertTimeStringToSeconds(mi)));
+const convertMiStringToKmString = (mi: string) => {
+  const time = convertTimeStringToSeconds(mi);
+  return !isNaN(time)
+    ? convertSecondsToTimeString(convertMiToKm(time))
+    : '';
+};
 
 export const initializeUnit = (km?: string, mi?: string): Unit | undefined =>
   Boolean(km)
@@ -77,3 +61,19 @@ export const generateValuesFromMi = (
   mi,
   km: mi ? convertMiStringToKmString(mi) : undefined,
 });
+
+const pathForKm = (km?: string) =>
+  km ? `/km/${km}` : '/';
+
+const pathForMi = (mi?: string) =>
+  mi ? `/mi/${mi}` : '/';
+
+export const updateUrlForUnit = ({ km, mi }: UnitValues) => {
+  if (Boolean(km)) {
+    window.history.pushState({ km }, '', pathForKm(km));
+  } else if (Boolean(mi)) {
+    window.history.pushState({ mi }, '', pathForMi(mi));
+  } else {
+    window.history.pushState({ }, '', '/');
+  }
+};

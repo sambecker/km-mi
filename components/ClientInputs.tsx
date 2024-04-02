@@ -2,12 +2,13 @@
 
 import { useAppState } from '@/state';
 import {
-  pathForKm,
-  pathForMi,
   generateValuesFromKm,
   generateValuesFromMi,
+  updateUrlForUnit,
 } from '@/unit';
 import { twMerge } from 'tailwind-merge';
+
+const DEFAULT_PLACEHOLDER = '4:40';
 
 export default function ClientInputs() {
   const { unit, setUnit, values, setValues } = useAppState();
@@ -18,7 +19,7 @@ export default function ClientInputs() {
     value = '',
     isSelected: boolean,
     onChange: (value?: string) => void,
-    onFocus: () => void,
+    onFocus: (value?: string) => void,
     placeholder?: string,
   ) =>
     <div className="flex flex-col basis-full gap-2">
@@ -29,13 +30,13 @@ export default function ClientInputs() {
           className="basis-full"
           value={value}
           onChange={e => onChange(e.target.value)}
-          onFocus={onFocus}
+          onFocus={e => onFocus(e.target.value)}
           onBlur={() => {
             if (!values?.km && !values?.mi) {
               setUnit?.(undefined);
             }
           }}
-          placeholder={placeholder ?? '4:40'}
+          placeholder={placeholder ?? DEFAULT_PLACEHOLDER}
         />
       </div>
       <label
@@ -58,9 +59,12 @@ export default function ClientInputs() {
         unit === 'km',
         km => {
           setValues?.(generateValuesFromKm(km, values));
-          window.history.pushState({ km }, '', pathForKm(km));
+          updateUrlForUnit ({ km });
         },
-        () => setUnit?.('km'),
+        km => {
+          setUnit?.('km');
+          updateUrlForUnit({ km });
+        }
       )}
       {renderInput(
         'mi',
@@ -69,9 +73,12 @@ export default function ClientInputs() {
         unit === 'mi',
         mi => {
           setValues?.(generateValuesFromMi(mi, values));
-          window.history.pushState({ mi }, '', pathForMi(mi));
+          updateUrlForUnit({ mi });
         },
-        () => setUnit?.('mi'),
+        mi => {
+          setUnit?.('mi');
+          updateUrlForUnit({ mi });
+        }
       )}
     </div>
   );
