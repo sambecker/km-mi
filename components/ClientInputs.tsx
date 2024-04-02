@@ -1,7 +1,12 @@
 'use client';
 
 import { useAppState } from '@/state';
-import { pathForKm, pathForMi, generateValuesFromKm, generateValuesFromMi } from '@/unit';
+import {
+  pathForKm,
+  pathForMi,
+  generateValuesFromKm,
+  generateValuesFromMi,
+} from '@/unit';
 
 export default function ClientInputs() {
   const { setUnit, values, setValues } = useAppState();
@@ -17,6 +22,11 @@ export default function ClientInputs() {
       value={value}
       onChange={e => onChange(e.target.value)}
       onFocus={onFocus}
+      onBlur={() => {
+        if (!values?.km && !values?.mi) {
+          setUnit?.(undefined);
+        }
+      }}
       placeholder="Per hour"
     />;
 
