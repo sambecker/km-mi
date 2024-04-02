@@ -3,14 +3,14 @@ import ClientHeader from '@/components/ClientHeader';
 import { Suspense } from 'react';
 import { twMerge } from 'tailwind-merge';
 import AppStateProvider from '@/state/AppStateProvider';
-import AppStateInitializer from '@/state/AppStateInitializer';
 
-export default function Home() {
+export default function Home({
+  searchParams: { km, mi },
+}: {
+  searchParams: Record<string, string | undefined>;
+}) {
   return (
-    <AppStateProvider>
-      <Suspense>
-        <AppStateInitializer />
-      </Suspense>
+    <AppStateProvider {...{ km, mi }}>
       <main>
         <div className={twMerge(
           'flex w-full items-center justify-center h-[100vh]',
