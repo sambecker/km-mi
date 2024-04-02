@@ -1,41 +1,43 @@
 'use client';
 
 import { useAppState } from '@/state';
-import { updateKmValue, updateMiValue } from '@/unit';
+import { pathForKm, pathForMi, generateValuesFromKm, generateValuesFromMi } from '@/unit';
 
 export default function ClientInputs() {
   const { setUnit, values, setValues } = useAppState();
 
+  const renderInput = (
+    value = '',
+    onChange: (value?: string) => void,
+    onFocus: () => void,
+  ) =>
+    <input
+      type="text"
+      className="grow"
+      value={value}
+      onChange={e => onChange(e.target.value)}
+      onFocus={onFocus}
+      placeholder="Per hour"
+    />;
+
   return (
-    <div className="flex gap-2 [&>*]:grow">
-      <input
-        type="text"
-        value={values?.km ?? ''}
-        onChange={e => {
-          setValues?.(updateKmValue(values, e.target.value));
-          window.history.pushState(
-            { km: e.target.value },
-            '',
-            e.target.value ? `/km/${e.target.value}` : '/',
-          );
-        }}
-        onFocus={() => setUnit?.('km')}
-        placeholder="Per hour"
-      />
-      <input
-        type="text"
-        value={values?.mi ?? ''}
-        onChange={e => {
-          setValues?.(updateMiValue(values, e.target.value));
-          window.history.pushState(
-            { mi: e.target.value },
-            '',
-            e.target.value ? `/mi/${e.target.value}` : '/',
-          );
-        }}
-        onFocus={() => setUnit?.('mi')}
-        placeholder="Per hour"
-      />
+    <div className="flex gap-2">
+      {renderInput(
+        values?.km,
+        km => {
+          setValues?.(generateValuesFromKm(km, values));
+          window.history.pushState({ km }, '', pathForKm(km));
+        },
+        () => setUnit?.('km'),
+      )}
+      {renderInput(
+        values?.mi,
+        mi => {
+          setValues?.(generateValuesFromMi(mi, values));
+          window.history.pushState({ mi }, '', pathForMi(mi));
+        },
+        () => setUnit?.('mi'),
+      )}
     </div>
   );
 }

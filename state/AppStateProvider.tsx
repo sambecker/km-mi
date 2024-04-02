@@ -1,6 +1,6 @@
 'use client';
 
-import { Unit, UnitValues } from '@/unit';
+import { Unit, UnitValues, initializeUnit, initializeValues } from '@/unit';
 import { AppStateContext } from '.';
 import { useState } from 'react';
 
@@ -13,12 +13,12 @@ export default function AppStateProvider({
   mi?: string
   children: React.ReactNode
 }) {
-  const [unit, setUnit] = useState<Unit | undefined>(Boolean(km)
-    ? 'km'
-    : Boolean(mi)
-      ? 'mi'
-      : undefined);
-  const [values, setValues] = useState<UnitValues | undefined>({ km, mi });
+  const [unit, setUnit] = useState<Unit | undefined>(
+    initializeUnit(km, mi)
+  );
+  const [values, setValues] = useState<UnitValues | undefined>(
+    initializeValues(km, mi)
+  );
 
   return (
     <AppStateContext.Provider value={{

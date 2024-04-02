@@ -1,12 +1,10 @@
-import ClientInputs from '@/components/ClientInputs';
-import ClientHeader from '@/components/ClientHeader';
 import AppStateProvider from '@/state/AppStateProvider';
+import ClientContent from '@/components/ClientContent';
 
 export default function Home() {
   return (
     <AppStateProvider>
-      <ClientHeader />
-      <ClientInputs />
+      <ClientContent />
     </AppStateProvider>
   );
 }

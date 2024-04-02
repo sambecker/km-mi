@@ -1,6 +1,5 @@
-import ClientInputs from '@/components/ClientInputs';
-import ClientHeader from '@/components/ClientHeader';
 import AppStateProvider from '@/state/AppStateProvider';
+import ClientContent from '@/components/ClientContent';
 
 export default function Home({
   params: { mi },
@@ -9,8 +8,7 @@ export default function Home({
 }) {
   return (
     <AppStateProvider {...{ mi }}>
-      <ClientHeader />
-      <ClientInputs />
+      <ClientContent />
     </AppStateProvider>
   );
 }
