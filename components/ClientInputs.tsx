@@ -7,19 +7,21 @@ import {
   generateValuesFromKm,
   generateValuesFromMi,
 } from '@/unit';
+import { twMerge } from 'tailwind-merge';
 
 export default function ClientInputs() {
-  const { setUnit, values, setValues } = useAppState();
+  const { unit, setUnit, values, setValues } = useAppState();
 
   const renderInput = (
     id: string,
     label: string,
     value = '',
+    isSelected: boolean,
     onChange: (value?: string) => void,
     onFocus: () => void,
     placeholder?: string,
   ) =>
-    <div className="flex flex-col basis-full gap-1">
+    <div className="flex flex-col basis-full gap-2">
       <div className="flex">
         <input
           id={id}
@@ -38,7 +40,10 @@ export default function ClientInputs() {
       </div>
       <label
         htmlFor={id}
-        className="text-sm text-gray-300 dark:text-gray-700"
+        className={twMerge(
+          'pl-2 text-[12.5px] font-medium',
+          !isSelected && 'text-gray-700',
+        )}
       >
         {label}
       </label>
@@ -50,6 +55,7 @@ export default function ClientInputs() {
         'km',
         'minutes per km',
         values?.km,
+        unit === 'km',
         km => {
           setValues?.(generateValuesFromKm(km, values));
           window.history.pushState({ km }, '', pathForKm(km));
@@ -60,6 +66,7 @@ export default function ClientInputs() {
         'mi',
         'minutes per mile',
         values?.mi,
+        unit === 'mi',
         mi => {
           setValues?.(generateValuesFromMi(mi, values));
           window.history.pushState({ mi }, '', pathForMi(mi));
