@@ -7,7 +7,7 @@ export default function Home({
   params: { mi: string }
 }) {
   return (
-    <AppStateProvider {...{ mi }}>
+    <AppStateProvider {...{ mi: decodeURIComponent(mi) }}>
       <ClientContent />
     </AppStateProvider>
   );

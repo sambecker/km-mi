@@ -1,8 +1,11 @@
-import { parseTimeString } from '@/utility/number';
+import {
+  convertSecondsToTimeString,
+  convertTimeStringToSeconds,
+} from '@/utility/number';
 import { ReadonlyURLSearchParams } from 'next/navigation';
 
-const KM_MI_CONVERSION = 0.621371;
-const MI_KM_CONVERSION = 1.60934;
+const KM_MI_CONVERSION = 1.60934;
+const MI_KM_CONVERSION = 0.621371;
 
 export type Unit = 'km' | 'mi';
 
@@ -37,6 +40,12 @@ const convertKmToMi = (km: number): number => km * KM_MI_CONVERSION;
 
 const convertMiToKm = (mi: number): number => mi * MI_KM_CONVERSION;
 
+const convertKmStringToMiString = (km: string): string =>
+  convertSecondsToTimeString(convertKmToMi(convertTimeStringToSeconds(km)));
+
+const convertMiStringToKmString = (mi: string): string =>
+  convertSecondsToTimeString(convertMiToKm(convertTimeStringToSeconds(mi)));
+
 export const initializeUnit = (km?: string, mi?: string): Unit | undefined =>
   Boolean(km)
     ? 'km'
@@ -57,7 +66,7 @@ export const generateValuesFromKm = (
 ) => ({
   ...current,
   km,
-  mi: km ? convertKmToMi(parseTimeString(km)).toString() : undefined,
+  mi: km ? convertKmStringToMiString(km) : undefined,
 });
 
 export const generateValuesFromMi = (
@@ -66,5 +75,5 @@ export const generateValuesFromMi = (
 ) => ({
   ...current,
   mi,
-  km: mi ? convertMiToKm(parseTimeString(mi)).toString() : undefined,
+  km: mi ? convertMiStringToKmString(mi) : undefined,
 });

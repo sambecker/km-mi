@@ -7,7 +7,7 @@ export default function Home({
   params: { km: string }
 }) {
   return (
-    <AppStateProvider {...{ km }}>
+    <AppStateProvider {...{ km: decodeURIComponent(km) }}>
       <ClientContent />
     </AppStateProvider>
   );
