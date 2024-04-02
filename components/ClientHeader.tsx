@@ -1,18 +1,17 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
+import { useAppState } from '@/state';
 
 export default function ClientHeader() {
-  const searchParams = useSearchParams();
-  const isKm = Boolean(searchParams.get('km'));
-  const isMi = Boolean(searchParams.get('mi'));
+  const { unit } = useAppState();
+
   return (
     <div>
-      <span className={!isKm ? 'opacity-10' : undefined}>
+      <span className={unit !== 'km' ? 'opacity-10' : undefined}>
         KM
       </span>
       /
-      <span className={!isMi ? 'opacity-10' : undefined}>
+      <span className={unit !== 'mi' ? 'opacity-10' : undefined}>
         MI
       </span>
     </div>
