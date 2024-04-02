@@ -16,7 +16,7 @@ export default function ClientInputs() {
           window.history.pushState(
             { km: e.target.value },
             '',
-            e.target.value ? `/?km=${e.target.value}` : '/',
+            e.target.value ? `/km/${e.target.value}` : '/',
           );
         }}
         onFocus={() => setUnit?.('km')}
@@ -30,7 +30,7 @@ export default function ClientInputs() {
           window.history.pushState(
             { mi: e.target.value },
             '',
-            e.target.value ? `/?mi=${e.target.value}` : '/',
+            e.target.value ? `/mi/${e.target.value}` : '/',
           );
         }}
         onFocus={() => setUnit?.('mi')}

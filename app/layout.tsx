@@ -1,12 +1,13 @@
 /* eslint-disable max-len */
 import type { Metadata } from 'next';
 import { GeistMono } from 'geist/font/mono';
+import { twMerge } from 'tailwind-merge';
 
 import './globals.css';
 
 export const metadata: Metadata = {
   title: 'KM/MI',
-  description: 'Convert running paces from kilometers to miles and vice versa',
+  description: 'Convert paces from kilometers to miles and vice versa',
 };
 
 export default function RootLayout({
@@ -23,7 +24,16 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className={GeistMono.className}>
-        {children}
+        <main>
+          <div className={twMerge(
+            'flex w-full items-center justify-center h-[100vh]',
+            'text-8xl font-bold',
+          )}>
+            <div className="translate-y-[-1rem] space-y-4">
+              {children}
+            </div>
+          </div>
+        </main>
       </body>
     </html>
   );
