@@ -1,17 +1,23 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useAppState } from '.';
-import { getUnitFromSearchParams } from '@/unit';
+import { getUnitFromSearchParams, getValuesFromSearchParams } from '@/unit';
 
 export default function AppStateInitializer() {
-  const params = useSearchParams();
+  const hasInitialized = useRef(false);
 
-  const { setUnit } = useAppState();
+  const params = useSearchParams();
+  
+  const { setUnit, setValues } = useAppState();
 
   useEffect(() => {
-    setUnit?.(getUnitFromSearchParams(params));
-  }, [params, setUnit]);
+    if (!hasInitialized.current) {
+      hasInitialized.current = true;
+      setUnit?.(getUnitFromSearchParams(params));
+      setValues?.(getValuesFromSearchParams(params));
+    }
+  }, [params, setUnit, setValues]);
   return <></>;
 }
