@@ -14,7 +14,7 @@ const VERCEL_DEPLOYMENT_URL = process.env.NEXT_PUBLIC_VERCEL_URL;
 const VERCEL_BRANCH_URL = process.env.NEXT_PUBLIC_VERCEL_BRANCH_URL;
   
 export const BASE_URL = VERCEL_ENV === 'production'
-  ? 'https://km-mi.vercel.app'
+  ? 'https://km-mi.com'
   : VERCEL_ENV === 'preview'
     ? VERCEL_BRANCH_URL || VERCEL_DEPLOYMENT_URL || ''
     : 'http://localhost:3000';
