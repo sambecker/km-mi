@@ -76,10 +76,10 @@ export const generateValuesFromMi = (
   km: mi ? convertMiStringToKmString(mi) : undefined,
 });
 
-const pathForKm = (km?: string) =>
+export const pathForKm = (km?: string) =>
   km ? `/km/${km}` : '/';
 
-const pathForMi = (mi?: string) =>
+export const pathForMi = (mi?: string) =>
   mi ? `/mi/${mi}` : '/';
 
 export const pathForKmImage = (km?: string) =>

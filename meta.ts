@@ -3,7 +3,9 @@ import {
   Unit,
   convertKmStringToMiString,
   convertMiStringToKmString,
+  pathForKm,
   pathForKmImage,
+  pathForMi,
   pathForMiImage,
 } from './unit';
 
@@ -29,6 +31,10 @@ export const metaForUnit = (unit: Unit, valueFromParam: string): Metadata => {
   const images = unit === 'km'
     ? pathForKmImage(value)
     : pathForMiImage(value);
+  const url = unit === 'km'
+    ? pathForKm(value)
+    : pathForMi(value);
+
   return {
     title,
     description,
@@ -36,11 +42,13 @@ export const metaForUnit = (unit: Unit, valueFromParam: string): Metadata => {
       title,
       description,
       images,
+      url,
     },
     twitter: {
       title,
       description,
       images,
+      card: 'summary_large_image',
     },
   };
 };
