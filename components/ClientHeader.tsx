@@ -1,6 +1,7 @@
 'use client';
 
 import { useAppState } from '@/state';
+import { characterForUnit } from '@/unit';
 import { twMerge } from 'tailwind-merge';
 
 export default function ClientHeader() {
@@ -8,8 +9,8 @@ export default function ClientHeader() {
 
   const renderFadingSegment = (text: string, shouldFade?: boolean) =>
     <span className={twMerge(
-      'transition-opacity duration-300',
-      shouldFade && 'opacity-10',
+      'transition-colors duration-300',
+      shouldFade && 'text-gray-900',
     )}>
       {text}
     </span>;
@@ -17,7 +18,7 @@ export default function ClientHeader() {
   return (
     <div className="flex gap-2">
       {renderFadingSegment('KM', unit !== 'km')}
-      {renderFadingSegment(unit === 'km' ? '→' : unit === 'mi' ? '←' : '/')}
+      {renderFadingSegment(characterForUnit(unit))}
       {renderFadingSegment('MI', unit !== 'mi')}
     </div>
   );

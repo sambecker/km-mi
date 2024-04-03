@@ -54,9 +54,9 @@ export default function ClientInputs() {
     <div className="flex gap-2">
       {renderInput(
         'km',
-        'minutes per km',
+        'minutes/km',
         values?.km,
-        unit === 'km',
+        unit === 'km' || Boolean(values?.km),
         km => {
           setValues?.(generateValuesFromKm(km, values));
           updateUrlForUnit ({ km });
@@ -68,9 +68,9 @@ export default function ClientInputs() {
       )}
       {renderInput(
         'mi',
-        'minutes per mile',
+        'minutes/mile',
         values?.mi,
-        unit === 'mi',
+        unit === 'mi' || Boolean(values?.mi),
         mi => {
           setValues?.(generateValuesFromMi(mi, values));
           updateUrlForUnit({ mi });

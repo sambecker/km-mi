@@ -10,20 +10,34 @@ export type Unit = 'km' | 'mi';
 
 export type UnitValues = Partial<Record<Unit, string>>;
 
+export type KmParams = { params: { km: string } };
+export type MiParams = { params: { mi: string } };
+
 const INITIAL_VALUES: UnitValues = { km: '', mi: '' };
+
+export const characterForUnit = (unit?: Unit) => {
+  switch (unit) {
+  case 'km':
+    return '→';
+  case 'mi':
+    return '←';
+  default:
+    return '/';
+  }
+};
 
 const convertKmToMi = (km: number) => km * KM_MI_CONVERSION;
 
 const convertMiToKm = (mi: number) => mi * MI_KM_CONVERSION;
 
-const convertKmStringToMiString = (km: string) => {
+export const convertKmStringToMiString = (km: string) => {
   const time = convertTimeStringToSeconds(km);
   return !isNaN(time)
     ? convertSecondsToTimeString(convertKmToMi(time))
     : '';
 };
 
-const convertMiStringToKmString = (mi: string) => {
+export const convertMiStringToKmString = (mi: string) => {
   const time = convertTimeStringToSeconds(mi);
   return !isNaN(time)
     ? convertSecondsToTimeString(convertMiToKm(time))
@@ -67,6 +81,12 @@ const pathForKm = (km?: string) =>
 
 const pathForMi = (mi?: string) =>
   mi ? `/mi/${mi}` : '/';
+
+export const pathForKmImage = (km?: string) =>
+  `${pathForKm(km)}/image`;
+
+export const pathForMiImage = (mi?: string) =>
+  `${pathForMi(mi)}/image`;
 
 export const updateUrlForUnit = ({ km, mi }: UnitValues) => {
   if (Boolean(km)) {

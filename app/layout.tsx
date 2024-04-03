@@ -2,12 +2,24 @@
 import type { Metadata } from 'next';
 import { GeistMono } from 'geist/font/mono';
 import { twMerge } from 'tailwind-merge';
+import { BASE_URL, DESCRIPTION, TITLE } from '@/meta';
 
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'KM/MI',
-  description: 'Convert paces from kilometers to miles and vice versa',
+  title: TITLE,
+  description: DESCRIPTION,
+  metadataBase: new URL(BASE_URL),
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    images: '/image',
+  },
+  twitter: {
+    title: TITLE,
+    description: DESCRIPTION,
+    images: '/image',
+  },
 };
 
 export default function RootLayout({
@@ -23,10 +35,15 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
       </head>
-      <body className={GeistMono.className}>
-        <main>
+      <body
+        className={twMerge(
+          GeistMono.className,
+          'h-[100dvh]',
+        )}
+      >
+        <main className="h-full">
           <div className={twMerge(
-            'flex w-full items-center justify-center h-[100vh]',
+            'flex w-full items-center justify-center h-full',
             'text-8xl font-bold',
           )}>
             {children}
