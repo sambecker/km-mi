@@ -8,7 +8,11 @@ export const convertTimeStringToSeconds = (timeString: string) => {
 };
 
 export const convertSecondsToTimeString = (seconds: number) => {
-  const minutes = Math.floor(seconds / 60);
-  const remainingSeconds = Math.round(seconds % 60);
+  let minutes = Math.floor(seconds / 60);
+  let remainingSeconds = Math.round(seconds % 60);
+  if (remainingSeconds === 60) {
+    minutes += 1;
+    remainingSeconds = 0;
+  }
   return `${minutes}:${String(remainingSeconds).padStart(2, '0')}`;
 };

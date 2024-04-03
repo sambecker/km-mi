@@ -2,13 +2,15 @@
 
 import { useAppState } from '@/state';
 import {
+  convertKmStringToMiString,
   generateValuesFromKm,
   generateValuesFromMi,
   updateUrlForUnit,
 } from '@/unit';
 import { twMerge } from 'tailwind-merge';
 
-const DEFAULT_PLACEHOLDER = '4:40';
+const PLACEHOLDER_KM = '4:00';
+const PLACEHOLDER_MI = convertKmStringToMiString(PLACEHOLDER_KM);
 
 export default function ClientInputs() {
   const { unit, setUnit, values, setValues } = useAppState();
@@ -20,7 +22,7 @@ export default function ClientInputs() {
     isSelected: boolean,
     onChange: (value?: string) => void,
     onFocus: (value?: string) => void,
-    placeholder?: string,
+    placeholder: string,
   ) =>
     <div className="flex flex-col basis-full gap-2">
       <div className="flex">
@@ -36,7 +38,7 @@ export default function ClientInputs() {
               setUnit?.(undefined);
             }
           }}
-          placeholder={placeholder ?? DEFAULT_PLACEHOLDER}
+          placeholder={placeholder}
         />
       </div>
       <label
@@ -64,7 +66,8 @@ export default function ClientInputs() {
         km => {
           setUnit?.('km');
           updateUrlForUnit({ km });
-        }
+        },
+        PLACEHOLDER_KM,
       )}
       {renderInput(
         'mi',
@@ -78,7 +81,8 @@ export default function ClientInputs() {
         mi => {
           setUnit?.('mi');
           updateUrlForUnit({ mi });
-        }
+        },
+        PLACEHOLDER_MI,
       )}
     </div>
   );
