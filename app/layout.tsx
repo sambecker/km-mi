@@ -5,6 +5,7 @@ import { twMerge } from 'tailwind-merge';
 import { BASE_URL, DESCRIPTION, TITLE } from '@/meta';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import Footer from '@/components/Footer';
 
 import './globals.css';
 
@@ -51,10 +52,12 @@ export default function RootLayout({
       >
         <main className="h-full">
           <div className={twMerge(
-            'flex w-full items-center justify-center h-full',
-            'text-8xl font-bold',
+            'flex flex-col w-full items-center justify-center h-full',
           )}>
-            {children}
+            <div className="flex grow items-center">
+              {children}
+            </div>
+            <Footer />
           </div>
         </main>
         <Analytics />

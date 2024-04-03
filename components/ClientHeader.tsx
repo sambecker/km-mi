@@ -16,7 +16,7 @@ export default function ClientHeader() {
     </span>;
 
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 text-8xl font-bold">
       {renderFadingSegment('KM', unit !== 'km')}
       {renderFadingSegment(characterForUnit(unit))}
       {renderFadingSegment('MI', unit !== 'mi')}
