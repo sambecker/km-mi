@@ -3,6 +3,8 @@ import type { Metadata } from 'next';
 import { GeistMono } from 'geist/font/mono';
 import { twMerge } from 'tailwind-merge';
 import { BASE_URL, DESCRIPTION, TITLE } from '@/meta';
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import './globals.css';
 
@@ -55,6 +57,8 @@ export default function RootLayout({
             {children}
           </div>
         </main>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
