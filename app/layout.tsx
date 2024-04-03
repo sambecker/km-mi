@@ -20,6 +20,12 @@ export const metadata: Metadata = {
     description: DESCRIPTION,
     images: '/image',
   },
+  icons: [{
+    url: '/favicon.ico',
+    rel: 'icon',
+    type: 'image/png',
+    sizes: '180x180',
+  }],
 };
 
 export default function RootLayout({
