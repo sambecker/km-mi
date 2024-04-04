@@ -4,10 +4,10 @@ import { useAppState } from '@/state';
 import {
   convertKmStringToMiString,
   generateValuesFromKm,
-  generateValuesFromMi,
   updateUrlForUnit,
 } from '@/unit';
-import { twMerge } from 'tailwind-merge';
+import { useCallback, useEffect, useRef } from 'react';
+import ClientInput from './ClientInput';
 
 const PLACEHOLDER_KM = '4:00';
 const PLACEHOLDER_MI = convertKmStringToMiString(PLACEHOLDER_KM);
@@ -15,75 +15,59 @@ const PLACEHOLDER_MI = convertKmStringToMiString(PLACEHOLDER_KM);
 export default function ClientInputs() {
   const { unit, setUnit, values, setValues } = useAppState();
 
-  const renderInput = (
-    id: string,
-    label: string,
-    value = '',
-    isSelected: boolean,
-    onChange: (value?: string) => void,
-    onFocus: (value?: string) => void,
-    placeholder: string,
-  ) =>
-    <div className="flex flex-col basis-full gap-2">
-      <div className="flex">
-        <input
-          id={id}
-          type="text"
-          className="basis-full"
-          value={value}
-          onChange={e => onChange(e.target.value)}
-          onFocus={e => onFocus(e.target.value)}
-          onBlur={() => {
-            if (!values?.km && !values?.mi) {
-              setUnit?.(undefined);
-            }
-          }}
-          placeholder={placeholder}
-        />
-      </div>
-      <label
-        htmlFor={id}
-        className={twMerge(
-          'pl-2 text-[12.5px] font-medium',
-          !isSelected && 'text-gray-700',
-        )}
-      >
-        {label}
-      </label>
-    </div>;
+  const inputRefKm = useRef<HTMLInputElement>(null);
+  const inputRefMi = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (unit === 'km') {
+      inputRefKm.current?.focus();
+    } else if (unit === 'mi') {
+      inputRefMi.current?.focus();
+    }
+  }, [unit]);
+
+  const onBlur = useCallback(() => {
+    if (!values?.km && !values?.mi) {
+      setUnit?.(undefined);
+    }
+  }, [values?.km, values?.mi, setUnit]);
 
   return (
     <div className="flex gap-2">
-      {renderInput(
-        'km',
-        'minutes/km',
-        values?.km,
-        unit === 'km' || Boolean(values?.km),
-        km => {
+      <ClientInput
+        id="km"
+        inputRef={inputRefKm}
+        label="minutes/km"
+        value={values?.km}
+        isSelected={unit === 'km' || Boolean(values?.km)}
+        onChange={km => {
           setValues?.(generateValuesFromKm(km, values));
           updateUrlForUnit ({ km });
-        },
-        km => {
+        }}
+        onFocus={km => {
           setUnit?.('km');
           updateUrlForUnit({ km });
-        },
-        PLACEHOLDER_KM,
-      )}
-      {renderInput(
-        'mi',
-        'minutes/mile',
-        values?.mi,
-        unit === 'mi' || Boolean(values?.mi),
-        mi => {
-          setValues?.(generateValuesFromMi(mi, values));
-          updateUrlForUnit({ mi });
-        },
-        mi => {
+        }}
+        onBlur={onBlur}
+        placeholder={PLACEHOLDER_KM}
+      />
+      <ClientInput
+        id="mi"
+        inputRef={inputRefMi}
+        label="minutes/mile"
+        value={values?.mi}
+        isSelected={unit === 'mi' || Boolean(values?.mi)}
+        onChange={mi => {
+          setValues?.(generateValuesFromKm(mi, values));
+          updateUrlForUnit ({ mi });
+        }}
+        onFocus={mi => {
           setUnit?.('mi');
           updateUrlForUnit({ mi });
-        },
-        PLACEHOLDER_MI,
-      )}
+        }}
+        onBlur={onBlur}
+        placeholder={PLACEHOLDER_MI}
+      />
     </div>
   );
 }

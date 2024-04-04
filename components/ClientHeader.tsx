@@ -2,24 +2,26 @@
 
 import { useAppState } from '@/state';
 import { characterForUnit } from '@/unit';
-import { twMerge } from 'tailwind-merge';
+import ClientHeaderSegment from './ClientHeaderSegment';
 
 export default function ClientHeader() {
-  const { unit } = useAppState();
-
-  const renderFadingSegment = (text: string, shouldFade?: boolean) =>
-    <span className={twMerge(
-      'transition-colors duration-300',
-      shouldFade && 'text-gray-900',
-    )}>
-      {text}
-    </span>;
+  const { unit, setUnit } = useAppState();
 
   return (
-    <div className="flex gap-2 text-8xl font-bold">
-      {renderFadingSegment('KM', unit !== 'km')}
-      {renderFadingSegment(characterForUnit(unit))}
-      {renderFadingSegment('MI', unit !== 'mi')}
+    <div className="flex gap-2 text-8xl font-bold select-none">
+      <ClientHeaderSegment
+        text="KM"
+        shouldFade={unit !== 'km'}
+        onClick={() => setUnit?.('km')}
+      />
+      <ClientHeaderSegment
+        text={characterForUnit(unit)}
+      />
+      <ClientHeaderSegment
+        text="MI"
+        shouldFade={unit !== 'mi'}
+        onClick={() => setUnit?.('mi')}
+      />
     </div>
   );
 }
