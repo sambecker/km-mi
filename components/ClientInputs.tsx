@@ -4,6 +4,7 @@ import { useAppState } from '@/state';
 import {
   convertKmStringToMiString,
   generateValuesFromKm,
+  generateValuesFromMi,
   updateUrlForUnit,
 } from '@/unit';
 import { useCallback, useEffect, useRef } from 'react';
@@ -58,7 +59,7 @@ export default function ClientInputs() {
         value={values?.mi}
         isSelected={unit === 'mi' || Boolean(values?.mi)}
         onChange={mi => {
-          setValues?.(generateValuesFromKm(mi, values));
+          setValues?.(generateValuesFromMi(mi, values));
           updateUrlForUnit ({ mi });
         }}
         onFocus={mi => {
