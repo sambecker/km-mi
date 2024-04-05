@@ -16,3 +16,10 @@ export const convertSecondsToTimeString = (seconds: number) => {
   }
   return `${minutes}:${String(remainingSeconds).padStart(2, '0')}`;
 };
+
+export const formatTimeString = (timeString?: string) => {
+  const seconds = convertTimeStringToSeconds(timeString ?? '');
+  if (seconds && !isNaN(seconds)) {
+    return convertSecondsToTimeString(seconds);
+  }
+};

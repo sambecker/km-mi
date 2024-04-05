@@ -9,6 +9,7 @@ import {
 } from '@/site/unit';
 import { useCallback, useEffect, useRef } from 'react';
 import ClientInput from './ClientInput';
+import { formatTimeString } from '@/utility/number';
 
 const PLACEHOLDER_KM = '4:00';
 const PLACEHOLDER_MI = convertKmStringToMiString(PLACEHOLDER_KM);
@@ -31,7 +32,11 @@ export default function ClientInputs() {
     if (!values?.km && !values?.mi) {
       setUnit?.(undefined);
     }
-  }, [values?.km, values?.mi, setUnit]);
+    setValues?.({
+      km: formatTimeString(values?.km),
+      mi: formatTimeString(values?.mi),
+    });
+  }, [values?.km, values?.mi, setUnit, setValues]);
 
   return (
     <div className="flex gap-2">
