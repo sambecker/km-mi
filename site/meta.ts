@@ -7,7 +7,7 @@ import {
   pathForKmImage,
   pathForMi,
   pathForMiImage,
-} from '.';
+} from './unit';
 
 const VERCEL_ENV = process.env.NEXT_PUBLIC_VERCEL_ENV;
 const VERCEL_DEPLOYMENT_URL = process.env.NEXT_PUBLIC_VERCEL_URL;

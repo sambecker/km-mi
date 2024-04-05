@@ -6,7 +6,7 @@ import {
   generateValuesFromKm,
   generateValuesFromMi,
   updateUrlForUnit,
-} from '@/site';
+} from '@/site/unit';
 import { useCallback, useEffect, useRef } from 'react';
 import ClientInput from './ClientInput';
 

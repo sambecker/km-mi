@@ -1,6 +1,6 @@
 import AppStateProvider from '@/state/AppStateProvider';
 import ClientContent from '@/components/ClientContent';
-import { KmParams } from '@/site';
+import { KmParams } from '@/site/unit';
 import { Metadata } from 'next';
 import { metaForUnit } from '@/site/meta';
 
