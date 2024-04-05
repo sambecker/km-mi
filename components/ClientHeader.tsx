@@ -1,7 +1,7 @@
 'use client';
 
 import { useAppState } from '@/state';
-import { characterForUnit } from '@/unit';
+import { characterForUnit } from '@/site';
 import ClientHeaderSegment from './ClientHeaderSegment';
 
 export default function ClientHeader() {

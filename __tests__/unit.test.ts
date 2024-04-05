@@ -1,7 +1,7 @@
 import {
   convertKmStringToMiString,
   convertMiStringToKmString,
-} from '@/unit';
+} from '@/site';
 
 describe('Unit', () => {
   it('converts reversibly', () => {

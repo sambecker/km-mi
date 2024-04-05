@@ -1,8 +1,8 @@
 import AppStateProvider from '@/state/AppStateProvider';
 import ClientContent from '@/components/ClientContent';
-import { KmParams } from '@/unit';
+import { KmParams } from '@/site';
 import { Metadata } from 'next';
-import { metaForUnit } from '@/meta';
+import { metaForUnit } from '@/site/meta';
 
 export function generateMetadata({
   params: { km },

@@ -1,4 +1,4 @@
-import { Unit, UnitValues, characterForUnit } from '@/unit';
+import { Unit, UnitValues, characterForUnit } from '@/site';
 import { GEIST_MONO_FAMILY } from '@/utility/font';
 import colors from 'tailwindcss/colors';
 

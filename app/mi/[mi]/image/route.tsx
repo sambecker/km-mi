@@ -1,5 +1,5 @@
 import OGImage from '@/components/OGImage';
-import { MiParams, convertMiStringToKmString } from '@/unit';
+import { MiParams, convertMiStringToKmString } from '@/site';
 import { getFonts } from '@/utility/font';
 import { ImageResponse } from 'next/og';
 

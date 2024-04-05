@@ -4,7 +4,9 @@
   },
   "files.exclude": {
     ".next": true,
+    ".swc": true,
     ".vercel": true,
+    "next-env.d.ts": true,
     "node_modules": true
   }
 }
