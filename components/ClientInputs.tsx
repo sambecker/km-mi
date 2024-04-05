@@ -2,6 +2,7 @@
 
 import { useAppState } from '@/state';
 import {
+  Unit,
   convertKmStringToMiString,
   generateValuesFromKm,
   generateValuesFromMi,
@@ -28,14 +29,27 @@ export default function ClientInputs() {
     }
   }, [unit]);
 
-  const onBlur = useCallback(() => {
+  const onChange = useCallback((unit: Unit, value?: string) => {
+    setValues?.(values => unit === 'km'
+      ? generateValuesFromKm(value, values)
+      : generateValuesFromMi(value, values));
+    const valueFormatted = formatTimeString(value);
+    // Only update the URL if formatted value is valid
+    if (valueFormatted) {
+      updateUrlForUnit(unit === 'km'
+        ? { km: valueFormatted }
+        : { mi: valueFormatted });
+    }
+  }, [setValues]);
+
+  const onBlur = useCallback((unit: Unit) => {
     if (!values?.km && !values?.mi) {
       setUnit?.(undefined);
     }
-    setValues?.({
-      km: formatTimeString(values?.km),
-      mi: formatTimeString(values?.mi),
-    });
+    const km = formatTimeString(values?.km);
+    const mi = formatTimeString(values?.mi);
+    setValues?.({ km, mi });
+    updateUrlForUnit(unit === 'km' ? { km } : { mi });
   }, [values?.km, values?.mi, setUnit, setValues]);
 
   return (
@@ -46,15 +60,12 @@ export default function ClientInputs() {
         label="minutes/km"
         value={values?.km}
         isSelected={unit === 'km' || Boolean(values?.km)}
-        onChange={km => {
-          setValues?.(generateValuesFromKm(km, values));
-          updateUrlForUnit ({ km });
-        }}
+        onChange={km => onChange('km', km)}
         onFocus={km => {
           setUnit?.('km');
           updateUrlForUnit({ km });
         }}
-        onBlur={onBlur}
+        onBlur={() => onBlur('km')}
         placeholder={PLACEHOLDER_KM}
       />
       <ClientInput
@@ -63,15 +74,12 @@ export default function ClientInputs() {
         label="minutes/mile"
         value={values?.mi}
         isSelected={unit === 'mi' || Boolean(values?.mi)}
-        onChange={mi => {
-          setValues?.(generateValuesFromMi(mi, values));
-          updateUrlForUnit ({ mi });
-        }}
+        onChange={mi => onChange('mi', mi)}
         onFocus={mi => {
           setUnit?.('mi');
           updateUrlForUnit({ mi });
         }}
-        onBlur={onBlur}
+        onBlur={() => onBlur('mi')}
         placeholder={PLACEHOLDER_MI}
       />
     </div>
