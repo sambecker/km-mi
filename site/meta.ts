@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 import {
   Unit,
-  convertKmStringToMiString,
-  convertMiStringToKmString,
+  getUnitBasedDescription,
+  getUnitBasedTitle,
   pathForKm,
   pathForKmImage,
   pathForMi,
@@ -24,10 +24,8 @@ export const DESCRIPTION = 'Convert pace from kilometers to miles and back';
 
 export const metaForUnit = (unit: Unit, valueFromParam: string): Metadata => {
   const value = decodeURIComponent(valueFromParam);
-  const title = unit === 'km'
-    ? `${value} → ${convertKmStringToMiString(value)}`
-    : `${convertMiStringToKmString(value)} ← ${value}`;
-  const description = `minutes/km ${unit === 'km' ? '→' : '←'} minutes/mile`;
+  const title = getUnitBasedTitle(unit, value);
+  const description = getUnitBasedDescription(unit);
   const images = unit === 'km'
     ? pathForKmImage(value)
     : pathForMiImage(value);

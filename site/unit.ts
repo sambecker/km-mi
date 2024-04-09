@@ -97,3 +97,10 @@ export const updateUrlForUnit = ({ km, mi }: UnitValues) => {
     window.history.pushState({ }, '', '/');
   }
 };
+
+export const getUnitBasedTitle = (unit: Unit, value: string) => unit === 'km'
+  ? `${value} → ${convertKmStringToMiString(value)}`
+  : `${convertMiStringToKmString(value)} ← ${value}`;
+
+export const getUnitBasedDescription = (unit: Unit) =>
+  `minutes/km ${unit === 'km' ? '→' : '←'} minutes/mile`;
