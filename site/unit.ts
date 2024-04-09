@@ -104,3 +104,14 @@ export const getUnitBasedTitle = (unit: Unit, value: string) => unit === 'km'
 
 export const getUnitBasedDescription = (unit: Unit) =>
   `minutes/km ${unit === 'km' ? '→' : '←'} minutes/mile`;
+
+export const getWordBasedTitle = (unit: Unit, value: string) =>
+  `${value} minutes per ${unit === 'km' ? 'kilometer' : 'mile'}`;
+
+export const getWordBasedDescription = (unit: Unit, value: string) => {
+  const valueConverted = unit === 'km'
+    ? convertKmStringToMiString(value)
+    : convertMiStringToKmString(value);
+  const unitConverted = unit === 'km' ? 'mile' : 'kilometer';
+  return `${valueConverted} minutes per ${unitConverted}`;
+};

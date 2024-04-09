@@ -1,8 +1,8 @@
 import { Metadata } from 'next';
 import {
   Unit,
-  getUnitBasedDescription,
-  getUnitBasedTitle,
+  getWordBasedDescription,
+  getWordBasedTitle,
   pathForKm,
   pathForKmImage,
   pathForMi,
@@ -24,8 +24,8 @@ export const DESCRIPTION = 'Convert pace from kilometers to miles and back';
 
 export const metaForUnit = (unit: Unit, valueFromParam: string): Metadata => {
   const value = decodeURIComponent(valueFromParam);
-  const title = getUnitBasedTitle(unit, value);
-  const description = getUnitBasedDescription(unit);
+  const title = getWordBasedTitle(unit, value);
+  const description = getWordBasedDescription(unit, value);
   const images = unit === 'km'
     ? pathForKmImage(value)
     : pathForMiImage(value);
