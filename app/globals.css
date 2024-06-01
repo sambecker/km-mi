@@ -3,12 +3,18 @@
 @tailwind utilities;
 
 @layer base {
+  /* Main */
   .bg-main { @apply bg-gray-950 }
   .text-main { @apply text-gray-50 }
+  .surface-main { @apply bg-main text-main }
+  /* Invert */
+  .bg-invert { @apply bg-gray-50 }
+  .text-invert { @apply text-gray-950 }
+  .surface-invert { @apply bg-invert text-invert }
+  /* Tags */
   body {
     @apply
-      bg-main
-      text-main
+      surface-main
   }
   input[type="text"]{
     @apply

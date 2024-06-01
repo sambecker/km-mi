@@ -3,12 +3,14 @@
 import { useAppState } from '@/state';
 import { characterForUnit } from '@/site/unit';
 import ClientHeaderSegment from './ClientHeaderSegment';
+import RaceBadge from './RaceBadge';
+import { twMerge } from 'tailwind-merge';
 
 export default function ClientHeader() {
   const { unit, setUnit } = useAppState();
 
   return (
-    <div className="flex gap-2 text-8xl font-bold select-none">
+    <div className="relative flex gap-2 text-8xl font-bold select-none">
       <ClientHeaderSegment
         text="KM"
         shouldFade={unit !== 'km'}
@@ -22,6 +24,12 @@ export default function ClientHeader() {
         shouldFade={unit !== 'mi'}
         onClick={() => setUnit?.('mi')}
       />
+      <RaceBadge className={twMerge(
+        'absolute -top-2',
+        unit === 'km' ? '-left-6' : '-right-6',
+      )}>
+        29:30
+      </RaceBadge>
     </div>
   );
 }
