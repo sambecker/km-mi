@@ -6,8 +6,10 @@ import { BASE_URL, DESCRIPTION, TITLE } from '@/site/meta';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import Footer from '@/components/Footer';
+import { ReactNode } from 'react';
 
 import './globals.css';
+import Header from '@/components/Header';
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -34,7 +36,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="en">
@@ -54,6 +56,7 @@ export default function RootLayout({
           <div className={twMerge(
             'flex flex-col w-full items-center justify-center h-full',
           )}>
+            <Header />
             <div className="flex grow items-center">
               {children}
             </div>
