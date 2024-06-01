@@ -7,7 +7,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { FaCheck } from 'react-icons/fa';
 import { twMerge } from 'tailwind-merge';
 
-export default function UnitDropdown({
+export default function ModeDropdown({
   unit,
   active,
 }: {
@@ -22,8 +22,8 @@ export default function UnitDropdown({
         'py-1 px-2 text-left',
         'text-[12.5px] font-medium',
         'text-gray-700',
-        active && 'text-gray-50',
-        'data-[open]:text-gray-50 hover:text-text-gray-50',
+        active && 'text-main',
+        'data-[open]:text-main hover:text-text-main',
         'border border-transparent rounded-md',
         'hover:border-gray-800 data-[open]:border-gray-800',
         'active:bg-gray-900/50 data-[open]:bg-gray-900/50',
@@ -35,6 +35,7 @@ export default function UnitDropdown({
       <MenuItems
         anchor="bottom"
         className={twMerge(
+          'bg-main',
           '[--anchor-gap:8px]',
           'border border-gray-800 rounded-md',
           'w-[var(--button-width)]',

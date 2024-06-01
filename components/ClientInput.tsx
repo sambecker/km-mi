@@ -1,5 +1,5 @@
 import { RefObject } from 'react';
-import UnitDropdown from './UnitDropdown';
+import ModeDropdown from './ModeDropdown';
 import { Unit } from '@/site/unit';
 
 export default function ClientInput({
@@ -36,7 +36,7 @@ export default function ClientInput({
           placeholder={placeholder}
         />
       </div>
-      <UnitDropdown
+      <ModeDropdown
         unit={unit}
         active={isSelected}
       />

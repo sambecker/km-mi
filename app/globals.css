@@ -3,10 +3,12 @@
 @tailwind utilities;
 
 @layer base {
+  .bg-main { @apply bg-gray-950 }
+  .text-main { @apply text-gray-50 }
   body {
     @apply
-      bg-gray-950
-      text-gray-50
+      bg-main
+      text-main
   }
   input[type="text"]{
     @apply

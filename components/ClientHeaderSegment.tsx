@@ -14,7 +14,7 @@ export default function ClientHeaderSegment({
       className={twMerge(
         'transition-colors duration-300',
         shouldFade && 'text-gray-900',
-        Boolean(onClick) && 'cursor-pointer active:text-gray-50',
+        Boolean(onClick) && 'cursor-pointer active:text-main',
       )}
       onClick={onClick}
     >

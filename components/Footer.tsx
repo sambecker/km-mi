@@ -10,7 +10,7 @@ export default function Footer({ className } : { className?: string}) {
       'flex items-center justify-center gap-3',
       'text-base font-normal',
       'transition-colors duration-200 ease-in-out',
-      'text-gray-800 hover:text-gray-50',
+      'text-gray-800 hover:text-main',
       className,
     )}>
       <Link href="https://vercel.com" target="_blank">
