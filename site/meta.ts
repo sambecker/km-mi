@@ -3,11 +3,13 @@ import {
   Unit,
   getWordBasedDescription,
   getWordBasedTitle,
+} from './unit';
+import {
   pathForKm,
   pathForKmImage,
   pathForMi,
-  pathForMiImage,
-} from './unit';
+  pathForMiImage
+} from './path';
 
 const VERCEL_ENV = process.env.NEXT_PUBLIC_VERCEL_ENV;
 const VERCEL_PRODUCTION_URL =

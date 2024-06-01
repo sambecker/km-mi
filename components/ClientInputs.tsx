@@ -6,8 +6,8 @@ import {
   convertKmStringToMiString,
   generateValuesFromKm,
   generateValuesFromMi,
-  updateUrlForUnit,
 } from '@/site/unit';
+import { updateUrlForUnit } from '@/site/path';
 import { useCallback, useEffect, useRef } from 'react';
 import ClientInput from './ClientInput';
 import { formatTimeString } from '@/utility/number';

@@ -11,22 +11,29 @@ export default function Header({ className } : { className?: string}) {
     <Link
       href={href}
       className={twMerge(
+        'uppercase text-sm font-bold tracking-widest',
         selected ? 'text-gray-50' : 'text-gray-800',
       )}
     >
       {text}
     </Link>;
 
+  const renderDivider = () => <span className="text-gray-800">/</span>;
+
   return (
     <div className={twMerge(
       'h-16',
       'flex items-center justify-center gap-3',
-      'text-base font-normal',
       className,
     )}>
-      {renderLink('Pace', '/', !pathname.startsWith('/distance'))}
-      <span className="text-gray-800">/</span>
+      {renderLink('Pace', '/', (
+        !pathname.startsWith('/distance') &&
+        !pathname.startsWith('/race')
+      ))}
+      {renderDivider()}
       {renderLink('Distance', '/distance', pathname.startsWith('/distance'))}
+      {renderDivider()}
+      {renderLink('Race', '/race', pathname.startsWith('/race'))}
     </div>
   );
 }
