@@ -55,9 +55,8 @@ export default function ClientInputs() {
   return (
     <div className="flex gap-2">
       <ClientInput
-        id="km"
+        unit="km"
         inputRef={inputRefKm}
-        label="minutes/km"
         value={values?.km}
         isSelected={unit === 'km' || Boolean(values?.km)}
         onChange={km => onChange('km', km)}
@@ -69,9 +68,8 @@ export default function ClientInputs() {
         placeholder={PLACEHOLDER_KM}
       />
       <ClientInput
-        id="mi"
+        unit="mi"
         inputRef={inputRefMi}
-        label="minutes/mile"
         value={values?.mi}
         isSelected={unit === 'mi' || Boolean(values?.mi)}
         onChange={mi => onChange('mi', mi)}

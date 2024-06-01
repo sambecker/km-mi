@@ -1,10 +1,10 @@
 import { RefObject } from 'react';
-import { twMerge } from 'tailwind-merge';
+import UnitDropdown from './UnitDropdown';
+import { Unit } from '@/site/unit';
 
 export default function ClientInput({
-  id,
+  unit,
   inputRef,
-  label,
   value = '',
   isSelected,
   onChange,
@@ -12,9 +12,8 @@ export default function ClientInput({
   onBlur,
   placeholder,
 }: {
-  id: string
+  unit: Unit
   inputRef: RefObject<HTMLInputElement>
-  label: string
   value?: string,
   isSelected: boolean
   onChange: (value?: string) => void
@@ -26,7 +25,7 @@ export default function ClientInput({
     <div className="flex flex-col basis-full gap-2">
       <div className="flex">
         <input
-          id={id}
+          id={unit}
           ref={inputRef}
           type="text"
           className="basis-full"
@@ -37,15 +36,10 @@ export default function ClientInput({
           placeholder={placeholder}
         />
       </div>
-      <label
-        htmlFor={id}
-        className={twMerge(
-          'pl-2 text-[12.5px] font-medium',
-          !isSelected && 'text-gray-700',
-        )}
-      >
-        {label}
-      </label>
+      <UnitDropdown
+        unit={unit}
+        active={isSelected}
+      />
     </div>
   );
 }

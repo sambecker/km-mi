@@ -7,7 +7,8 @@ import {
   initializeValues,
 } from '@/site/unit';
 import { AppStateContext } from '.';
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
+import { Mode } from '@/site/mode';
 
 export default function AppStateProvider({
   km,
@@ -16,8 +17,10 @@ export default function AppStateProvider({
 }: {
   km?: string
   mi?: string
-  children: React.ReactNode
+  children: ReactNode
 }) {
+  const [mode, setMode] = useState<Mode | undefined>('pace');
+
   const [unit, setUnit] = useState<Unit | undefined>(
     initializeUnit(km, mi)
   );
@@ -27,6 +30,8 @@ export default function AppStateProvider({
 
   return (
     <AppStateContext.Provider value={{
+      mode,
+      setMode,
       unit,
       setUnit,
       values,
