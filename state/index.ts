@@ -4,11 +4,15 @@ import { Dispatch, SetStateAction, createContext, useContext } from 'react';
 
 export interface AppState {
   mode?: Mode
-  setMode?: Dispatch<SetStateAction<Mode | undefined>>
+  setMode?: (mode: Mode) => void
   unit?: Unit
   setUnit?: Dispatch<SetStateAction<Unit | undefined>>
-  values?: UnitValues
-  setValues?: Dispatch<SetStateAction<UnitValues | undefined>>
+  paceValues?: UnitValues
+  setPaceValues?: Dispatch<SetStateAction<UnitValues | undefined>>
+  distanceValues?: UnitValues
+  setDistanceValues?: Dispatch<SetStateAction<UnitValues | undefined>>
+  timeValue?: string
+  setTimeValue?: Dispatch<SetStateAction<string | undefined>>
 }
 
 export const AppStateContext = createContext<AppState>({});

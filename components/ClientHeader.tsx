@@ -3,8 +3,6 @@
 import { useAppState } from '@/state';
 import { characterForUnit } from '@/site/unit';
 import ClientHeaderSegment from './ClientHeaderSegment';
-import { twMerge } from 'tailwind-merge';
-import RaceBadge from './RaceBadge';
 
 export default function ClientHeader() {
   const { unit, setUnit } = useAppState();
@@ -24,12 +22,6 @@ export default function ClientHeader() {
         shouldFade={unit !== 'mi'}
         onClick={() => setUnit?.('mi')}
       />
-      <RaceBadge className={twMerge(
-        'absolute -top-2',
-        unit === 'km' ? '-left-6' : '-right-6',
-      )}>
-        29:30
-      </RaceBadge>
     </div>
   );
 }

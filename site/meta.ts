@@ -1,15 +1,11 @@
 import { Metadata } from 'next';
 import {
   Unit,
-  getWordBasedDescription,
-  getWordBasedTitle,
+  getDescriptionForPace,
+  getTitleForPace,
 } from './unit';
-import {
-  pathForKm,
-  pathForKmImage,
-  pathForMi,
-  pathForMiImage
-} from './path';
+import { pathForPace, pathForPaceImage } from './path';
+import { Mode } from './mode';
 
 const VERCEL_ENV = process.env.NEXT_PUBLIC_VERCEL_ENV;
 const VERCEL_PRODUCTION_URL =
@@ -30,16 +26,16 @@ export const BASE_URL = VERCEL_ENV === 'production'
 export const TITLE = 'KM/MI';
 export const DESCRIPTION = 'Convert pace from kilometers to miles and back';
 
-export const metaForUnit = (unit: Unit, valueFromParam: string): Metadata => {
+export const getMeta = (
+  mode: Mode,
+  valueFromParam: string,
+  unit: Unit,
+): Metadata => {
   const value = decodeURIComponent(valueFromParam);
-  const title = getWordBasedTitle(unit, value);
-  const description = getWordBasedDescription(unit, value);
-  const images = unit === 'km'
-    ? pathForKmImage(value)
-    : pathForMiImage(value);
-  const url = unit === 'km'
-    ? pathForKm(value)
-    : pathForMi(value);
+  const title = getTitleForPace(value, unit);
+  const description = getDescriptionForPace(value, unit);
+  const images = pathForPaceImage(value, unit);
+  const url = pathForPace(value, unit);
 
   return {
     title,

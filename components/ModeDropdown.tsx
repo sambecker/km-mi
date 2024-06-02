@@ -1,35 +1,27 @@
 'use client';
 
-import { labelForModeUnit, optionsForUnit } from '@/site/mode';
-import { Unit } from '@/site/unit';
+import { MODES } from '@/site/mode';
 import { useAppState } from '@/state';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { FaCheck } from 'react-icons/fa';
 import { twMerge } from 'tailwind-merge';
 
-export default function ModeDropdown({
-  unit,
-  active,
-}: {
-  unit: Unit
-  active?: boolean
-}) {
+export default function ModeDropdown() {
   const { mode, setMode } = useAppState();
-
   return (
     <Menu>
       <MenuButton className={twMerge(
-        'py-1 px-2 text-left bg-main w-full',
-        'text-[12.5px] font-medium',
+        'py-1.5 px-3 bg-main w-[160px]',
+        'text-[12.5px] font-medium tracking-wider',
         'text-gray-700',
-        active && 'text-main',
+        'text-main',
         'data-[open]:text-main hover:text-text-main',
-        'border border-transparent rounded-md',
-        'hover:border-gray-800 data-[open]:border-gray-800',
+        'border rounded-full',
+        'border-gray-800',
         'active:bg-gray-900/50 data-[open]:bg-gray-900/50',
       )}>
-        <span className="select-none">
-          {labelForModeUnit(mode, unit)}
+        <span className="select-none uppercase">
+          {mode}
         </span>
       </MenuButton>
       <MenuItems
@@ -37,27 +29,28 @@ export default function ModeDropdown({
         className={twMerge(
           'bg-main',
           '[--anchor-gap:8px]',
-          'border border-gray-800 rounded-md',
+          'border border-gray-800 rounded-xl',
           'w-[var(--button-width)]',
         )}
       >
-        {(optionsForUnit(unit)).map(option =>
-          <MenuItem key={option.label}>
+        {MODES.map(option =>
+          <MenuItem key={option}>
             <button
               className={twMerge(
-                'flex py-1.5 px-2 text-left w-full',
-                'text-[12.5px] font-medium',
+                'flex py-2 px-2 w-full relative',
+                'text-[12.5px] font-medium uppercase tracking-wider',
                 '[&:not(:last-child)]:border-b border-gray-800',
                 'active:bg-gray-900/50',
               )}
-              onClick={() => setMode?.(option.mode)}
+              onClick={() => setMode?.(option)}
             >
               <span className="flex-grow">
-                {option.label}
+                {option}
               </span>
               <span className={twMerge(
+                'absolute right-2',
                 'text-[10px] pt-1 hidden',
-                option.label === labelForModeUnit(mode, unit) && 'inline',
+                option === mode && 'inline',
               )}>
                 <FaCheck />
               </span>

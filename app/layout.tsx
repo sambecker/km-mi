@@ -8,7 +8,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import Footer from '@/components/Footer';
 import { ReactNode } from 'react';
 import AppStateProvider from '@/state/AppStateProvider';
-import ModeDropdownAlt from '@/components/ModeDropdownAlt';
+import ModeDropdown from '@/components/ModeDropdown';
 
 import './globals.css';
 
@@ -59,7 +59,7 @@ export default function RootLayout({
           )}>
             <AppStateProvider>
               <div className="h-16 flex items-center">
-                <ModeDropdownAlt />
+                <ModeDropdown />
               </div>
               <div className="flex grow items-center">
                 {children}
@@ -68,8 +68,8 @@ export default function RootLayout({
             </AppStateProvider>
           </div>
         </main>
-        <Analytics />
-        <SpeedInsights />
+        <Analytics debug={false} />
+        <SpeedInsights debug={false} />
       </body>
     </html>
   );

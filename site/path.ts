@@ -1,19 +1,60 @@
-import { UnitValues } from './unit';
+import { DEFAULT_MODE } from './mode';
+import { INITIAL_VALUES, Unit } from './unit';
 
-export const pathForKm = (km?: string) => km ? `/km/${km}` : '/';
+// DISTANCE: 2/km
+export const pathForDistance = (value: string | undefined, unit: Unit) =>
+  value ? `/${value}/${unit}` : '/';
 
-export const pathForMi = (mi?: string) => mi ? `/mi/${mi}` : '/';
+// PACE: pace/2:20/km
+export const pathForPace = (value: string | undefined, unit: Unit) =>
+  value ? `/pace/${value}/${unit}` : '/';
 
-export const pathForKmImage = (km?: string) => `${pathForKm(km)}/image`;
+// RACE: 5/km/in/34:30
+export const pathForRace = (
+  value: string | undefined,
+  unit: Unit,
+  time = '0:00'
+) =>
+  value ? `/${pathForDistance(value, unit)}/in/${time}` : '/';
 
-export const pathForMiImage = (mi?: string) => `${pathForMi(mi)}/image`;
+export const pathForDistanceImage = (value: string | undefined, unit: Unit) =>
+  `${pathForDistance(value, unit)}/image`;
 
-export const updateUrlForUnit = ({ km, mi }: UnitValues) => {
+export const pathForPaceImage = (value: string | undefined, unit: Unit) =>
+  `${pathForPace(value, unit)}/image`;
+
+export const pathForRaceImage = (
+  value: string | undefined,
+  unit: Unit,
+  time: string | undefined,
+) =>
+  `${pathForRace(value, unit, time)}/image`;
+
+export const updateUrlForModeUnit = (
+  mode = DEFAULT_MODE,
+  { km, mi } = INITIAL_VALUES,
+) => {
   if (Boolean(km)) {
-    window.history.pushState({ km }, '', pathForKm(km));
+    window.history.pushState(
+      { mode, km },
+      '',
+      mode === 'pace'
+        ? pathForPace(km, 'km')
+        : pathForDistance(km, 'km')
+    );
   } else if (Boolean(mi)) {
-    window.history.pushState({ mi }, '', pathForMi(mi));
+    window.history.pushState(
+      { mode, mi },
+      '',
+      mode === 'pace'
+        ? pathForPace(mi, 'mi')
+        : pathForDistance(mi, 'mi')
+    );
   } else {
-    window.history.pushState({}, '', '/');
+    window.history.pushState(
+      { mode },
+      '',
+      '/',
+    );
   }
 };

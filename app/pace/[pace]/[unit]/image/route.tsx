@@ -1,5 +1,5 @@
 import OGImage from '@/components/OGImage';
-import { KmParams, convertKmStringToMiString } from '@/site/unit';
+import { KmParams, convertPaceKmStringToMiString } from '@/site/unit';
 import { getFonts } from '@/utility/font';
 import { ImageResponse } from 'next/og';
 
@@ -12,7 +12,7 @@ export async function GET(
   return new ImageResponse(
     <OGImage {...{
       unit: 'km',
-      values: { km, mi: convertKmStringToMiString(km) },
+      values: { km, mi: convertPaceKmStringToMiString(km) },
     }} />,
     {
       width: 1000,

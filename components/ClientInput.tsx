@@ -1,9 +1,10 @@
 import { RefObject } from 'react';
-import ModeDropdown from './ModeDropdown';
 import { Unit } from '@/site/unit';
-import PaceBadge from './PaceBadge';
+import { twMerge } from 'tailwind-merge';
+import { Mode, inputLabelForModeUnit } from '@/site/mode';
 
 export default function ClientInput({
+  mode,
   unit,
   inputRef,
   value = '',
@@ -13,6 +14,7 @@ export default function ClientInput({
   onBlur,
   placeholder,
 }: {
+  mode: Mode
   unit: Unit
   inputRef: RefObject<HTMLInputElement>
   value?: string,
@@ -37,17 +39,15 @@ export default function ClientInput({
           placeholder={placeholder}
         />
       </div>
-      <div className="relative">
-        <div className="w-full">
-          <ModeDropdown
-            unit={unit}
-            active={isSelected}
-          />
-        </div>
-        <div className="absolute -top-5 -right-8 z-10">
-          <PaceBadge>7:00</PaceBadge>
-        </div>
-      </div>
+      <label
+        htmlFor={unit}
+        className={twMerge(
+          'pl-2 text-[12.5px] font-medium',
+          !isSelected && 'text-gray-700',
+        )}
+      >
+        {inputLabelForModeUnit(mode, unit)}
+      </label>
     </div>
   );
 }
