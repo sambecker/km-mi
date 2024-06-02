@@ -44,7 +44,7 @@ export default function ClientInput({
             active={isSelected}
           />
         </div>
-        <div className="absolute -top-5 -right-8">
+        <div className="absolute -top-5 -right-8 z-10">
           <PaceBadge>7:00</PaceBadge>
         </div>
       </div>

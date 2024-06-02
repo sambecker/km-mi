@@ -1,4 +1,3 @@
-import AppStateProvider from '@/state/AppStateProvider';
 import ClientContent from '@/components/ClientContent';
 import { MiParams } from '@/site/unit';
 import { Metadata } from 'next';
@@ -10,12 +9,8 @@ export function generateMetadata({
   return metaForUnit('mi', mi);
 }
 
-export default function MiPage({
-  params: { mi },
-}: MiParams) {
+export default function MiPage() {
   return (
-    <AppStateProvider {...{ mi: decodeURIComponent(mi) }}>
-      <ClientContent />
-    </AppStateProvider>
+    <ClientContent />
   );
 }

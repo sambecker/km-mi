@@ -1,4 +1,3 @@
-import AppStateProvider from '@/state/AppStateProvider';
 import ClientContent from '@/components/ClientContent';
 import { KmParams } from '@/site/unit';
 import { Metadata } from 'next';
@@ -10,12 +9,8 @@ export function generateMetadata({
   return metaForUnit('km', km);
 }
 
-export default function KmPage({
-  params: { km },
-}: KmParams) {
+export default function KmPage() {
   return (
-    <AppStateProvider {...{ km: decodeURIComponent(km) }}>
-      <ClientContent />
-    </AppStateProvider>
+    <ClientContent />
   );
 }

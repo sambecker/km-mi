@@ -9,21 +9,24 @@ import {
 import { AppStateContext } from '.';
 import { ReactNode, useState } from 'react';
 import { Mode } from '@/site/mode';
+import { useParams } from 'next/navigation';
 
 export default function AppStateProvider({
-  km,
-  mi,
   children,
 }: {
-  km?: string
-  mi?: string
   children: ReactNode
 }) {
+  const params = useParams<{ km?: string, mi?: string }>();
+  
+  const km = params.km ? decodeURIComponent(params.km) : undefined;
+  const mi = params.mi ? decodeURIComponent(params.mi) : undefined;
+
   const [mode, setMode] = useState<Mode | undefined>('pace');
 
   const [unit, setUnit] = useState<Unit | undefined>(
     initializeUnit(km, mi)
   );
+
   const [values, setValues] = useState<UnitValues | undefined>(
     initializeValues(km, mi)
   );
