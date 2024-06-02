@@ -1,6 +1,7 @@
 import { RefObject } from 'react';
 import ModeDropdown from './ModeDropdown';
 import { Unit } from '@/site/unit';
+import PaceBadge from './PaceBadge';
 
 export default function ClientInput({
   unit,
@@ -36,10 +37,17 @@ export default function ClientInput({
           placeholder={placeholder}
         />
       </div>
-      <ModeDropdown
-        unit={unit}
-        active={isSelected}
-      />
+      <div className="relative">
+        <div className="w-full">
+          <ModeDropdown
+            unit={unit}
+            active={isSelected}
+          />
+        </div>
+        <div className="absolute -top-5 -right-8">
+          <PaceBadge>7:00</PaceBadge>
+        </div>
+      </div>
     </div>
   );
 }

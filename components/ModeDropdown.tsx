@@ -19,7 +19,7 @@ export default function ModeDropdown({
   return (
     <Menu>
       <MenuButton className={twMerge(
-        'py-1 px-2 text-left',
+        'py-1 px-2 text-left w-full',
         'text-[12.5px] font-medium',
         'text-gray-700',
         active && 'text-main',

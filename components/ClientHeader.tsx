@@ -3,8 +3,8 @@
 import { useAppState } from '@/state';
 import { characterForUnit } from '@/site/unit';
 import ClientHeaderSegment from './ClientHeaderSegment';
-import RaceBadge from './RaceBadge';
 import { twMerge } from 'tailwind-merge';
+import RaceBadge from './RaceBadge';
 
 export default function ClientHeader() {
   const { unit, setUnit } = useAppState();

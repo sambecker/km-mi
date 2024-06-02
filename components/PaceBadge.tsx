@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
-import { FaAward } from 'react-icons/fa6';
 import Badge from './Badge';
+import { BiStopwatch } from 'react-icons/bi';
 
-export default function RaceBadge({
+export default function PaceBadge({
   children,
   className,
 }: {
@@ -11,8 +11,13 @@ export default function RaceBadge({
 }) {
   return (
     <Badge
-      icon={<FaAward className="text-[0.9em]" />}
+      icon={<span className="w-5 ml-[-1px]">
+        <BiStopwatch
+          className="text-[1.2em]"
+        />
+      </span>}
       className={className}
+      invert
     >
       {children}
     </Badge>
