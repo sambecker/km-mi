@@ -8,6 +8,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import Footer from '@/components/Footer';
 import { ReactNode } from 'react';
 import AppStateProvider from '@/state/AppStateProvider';
+import ModeDropdownAlt from '@/components/ModeDropdownAlt';
 
 import './globals.css';
 
@@ -56,12 +57,15 @@ export default function RootLayout({
           <div className={twMerge(
             'flex flex-col w-full items-center justify-center h-full',
           )}>
-            <div className="flex grow items-center">
-              <AppStateProvider>
+            <AppStateProvider>
+              <div className="h-16 flex items-center">
+                <ModeDropdownAlt />
+              </div>
+              <div className="flex grow items-center">
                 {children}
-              </AppStateProvider>
-            </div>
-            <Footer />
+              </div>
+              <Footer />
+            </AppStateProvider>
           </div>
         </main>
         <Analytics />
