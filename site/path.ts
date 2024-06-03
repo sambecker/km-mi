@@ -14,7 +14,7 @@ export const pathForPace = (value: string | undefined, unit: Unit) =>
 export const pathForRace = (
   distance: string | undefined,
   unit: Unit,
-  time = '0:00'
+  time: string | undefined,
 ) =>
   distance ? `${pathForDistance(distance, unit)}/in/${time}` : '/';
 

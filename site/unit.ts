@@ -27,6 +27,14 @@ export type ParamsPace = {
   }
 }
 
+export type ParamsRace = {
+  params: {
+    distance: string
+    unit: string
+    time: string
+  }
+}
+
 export const INITIAL_VALUES: UnitValues = { km: '', mi: '' };
 
 export const unitFromString = (unit: string): Unit =>
@@ -139,4 +147,50 @@ export const getDescriptionForPace = (pace: string, unit: Unit) => {
     : convertPaceMiStringToKmString(pace);
   const unitConverted = unit === 'km' ? 'mile' : 'kilometer';
   return `${valueConverted} minutes per ${unitConverted}`;
+};
+
+export const getTitleForDistance = (distance: string, unit: Unit) => {
+  const distanceNumber = parseFloat(distance);
+  const distancePhrase = distanceNumber === 1
+    ? unit === 'km' ? 'kilometer' : 'mile'
+    : unit === 'km' ? 'kilometers' : 'miles';
+  return `${distance} ${distancePhrase}`;
+};
+
+export const getDescriptionForDistance = (distance: string, unit: Unit) => {
+  const valueConverted = unit === 'km'
+    ? convertDistanceKmStringToMiString(distance)
+    : convertDistanceMiStringToKmString(distance);
+  const numberConverted = parseFloat(valueConverted);
+  const unitConverted = numberConverted === 1
+    ? unit === 'km' ? 'mile' : 'kilometer'
+    : unit === 'km' ? 'miles' : 'kilometers';
+  return `${valueConverted} ${unitConverted}`;
+};
+
+export const getTitleForRace = (
+  distance: string,
+  unit: Unit,
+  time: string,
+) => {
+  const distanceNumber = parseFloat(distance);
+  const distancePhrase = distanceNumber === 1
+    ? unit === 'km' ? 'kilometer' : 'mile'
+    : unit === 'km' ? 'kilometers' : 'miles';
+  return `${distance} ${distancePhrase} in ${time} minutes`;
+};
+
+export const getDescriptionForRace = (
+  distance: string,
+  unit: Unit,
+  time: string,
+) => {
+  const valueConverted = unit === 'km'
+    ? convertDistanceKmStringToMiString(distance)
+    : convertDistanceMiStringToKmString(distance);
+  const numberConverted = parseFloat(valueConverted);
+  const unitConverted = numberConverted === 1
+    ? unit === 'km' ? 'mile' : 'kilometer'
+    : unit === 'km' ? 'miles' : 'kilometers';
+  return `${valueConverted} ${unitConverted} in ${time} minutes`;
 };

@@ -11,7 +11,8 @@ export default function ModeDropdown() {
   return (
     <Menu>
       <MenuButton className={twMerge(
-        'py-1.5 px-3 bg-main w-[160px]',
+        'py-2 sm:py-1.5',
+        'px-3 bg-main w-[160px]',
         'text-[12.5px] font-medium tracking-wider',
         'text-gray-700',
         'text-main',
@@ -37,7 +38,8 @@ export default function ModeDropdown() {
           <MenuItem key={option}>
             <button
               className={twMerge(
-                'flex py-2 px-2 w-full relative',
+                'py-2.5 sm:py-2',
+                'flex px-2 w-full relative',
                 'text-[12.5px] font-medium uppercase tracking-wider',
                 '[&:not(:last-child)]:border-b border-gray-800',
                 'active:bg-gray-900/50',
