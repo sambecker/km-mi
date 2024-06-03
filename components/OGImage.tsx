@@ -1,13 +1,19 @@
-import { Unit, UnitValues, characterForUnit } from '@/site/unit';
+import { Unit, characterForUnit } from '@/site/unit';
 import { GEIST_MONO_FAMILY } from '@/utility/font';
 import colors from 'tailwindcss/colors';
 
 export default function OGImage({
   unit,
-  values,
+  valueLeft,
+  valueRight,
+  labelLeft,
+  labelRight,
 }: {
   unit?: Unit
-  values?: UnitValues,
+  valueLeft?: string
+  valueRight?: string
+  labelLeft: string
+  labelRight: string
 }) {
   const renderBox = (text = '00:00', dim: boolean, label: string) =>
     <div style={{
@@ -76,8 +82,8 @@ export default function OGImage({
           }}>MI</span>
         </div>
         <div style={{ display: 'flex', gap: 30, position: 'relative' }}>
-          {renderBox(values?.km, !values?.km, 'minutes/km')}
-          {renderBox(values?.mi, !values?.mi, 'minutes/mile')}
+          {renderBox(valueLeft, !valueLeft, labelLeft)}
+          {renderBox(valueRight, !valueRight, labelRight)}
         </div>
       </div>
     </div>

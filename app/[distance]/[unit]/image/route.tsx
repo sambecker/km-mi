@@ -1,9 +1,9 @@
 import OGImage from '@/components/OGImage';
 import { inputLabelForModeUnit } from '@/site/mode';
 import {
-  ParamsPace,
-  convertPaceKmStringToMiString,
-  convertPaceMiStringToKmString,
+  ParamsDistance,
+  convertDistanceKmStringToMiString,
+  convertDistanceMiStringToKmString,
   unitFromString,
 } from '@/site/unit';
 import { getFonts } from '@/utility/font';
@@ -13,16 +13,20 @@ export const runtime = 'edge';
 
 export async function GET(
   _: Request,
-  { params: { pace, unit: unitFromParams } }: ParamsPace,
+  { params: { distance, unit: unitFromParams } }: ParamsDistance,
 ) {
   const unit = unitFromString(unitFromParams);
   return new ImageResponse(
     <OGImage {...{
       unit,
-      valueLeft: unit === 'km' ? pace : convertPaceMiStringToKmString(pace),
-      valueRight: unit === 'mi' ? pace : convertPaceKmStringToMiString(pace),
-      labelLeft: inputLabelForModeUnit('pace', 'km'),
-      labelRight: inputLabelForModeUnit('pace', 'mi'),
+      valueLeft: unit === 'km'
+        ? distance
+        : convertDistanceMiStringToKmString(distance),
+      valueRight: unit === 'mi'
+        ? distance
+        : convertDistanceKmStringToMiString(distance),
+      labelLeft: inputLabelForModeUnit('distance', 'km'),
+      labelRight: inputLabelForModeUnit('distance', 'mi'),
     }} />,
     {
       width: 1000,

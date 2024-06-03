@@ -13,8 +13,12 @@ export type Unit = 'km' | 'mi';
 
 export type UnitValues = Partial<Record<Unit, string>>;
 
-export type KmParams = { params: { km: string } };
-export type MiParams = { params: { mi: string } };
+export type ParamsDistance = {
+  params: {
+    distance: string
+    unit: string
+  }
+}
 
 export type ParamsPace = {
   params: {

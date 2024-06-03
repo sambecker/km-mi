@@ -40,7 +40,7 @@ export default function ClientInput({
       <label
         htmlFor={id}
         className={twMerge(
-          'pl-2 text-[12.5px] font-medium uppercase tracking-wider',
+          'pl-2 text-[12.5px] font-medium',
           !isSelected && 'text-gray-700',
         )}
       >

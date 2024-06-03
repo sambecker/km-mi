@@ -32,7 +32,12 @@ export default function ClientInputs() {
 
   useEffect(() => {
     if (mode === 'race') {
-      inputRefTime.current?.focus();
+      if (
+        !inputRefKm.current?.focus &&
+        !inputRefMi.current?.focus
+      ) {
+        inputRefTime.current?.focus();
+      }
     } else {
       if (unit === 'km') {
         inputRefKm.current?.focus();
@@ -64,9 +69,11 @@ export default function ClientInputs() {
         mode,
         unit === 'km'
           ? { km: valueFormatted }
-          : { mi: valueFormatted });
+          : { mi: valueFormatted },
+        mode === 'race' ? time : undefined,
+      );
     }
-  }, [mode, setDistanceValues, setPaceValues]);
+  }, [mode, setDistanceValues, setPaceValues, time]);
 
   const onRaceChange = useCallback((value: string | undefined) => {
     setTime?.(value);
@@ -84,7 +91,8 @@ export default function ClientInputs() {
       !distanceValues?.km &&
       !distanceValues?.mi &&
       !paceValues?.km &&
-      !paceValues?.mi
+      !paceValues?.mi &&
+      !time
     ) {
       setUnit?.(undefined);
       updateUrl();
@@ -102,7 +110,11 @@ export default function ClientInputs() {
         setDistanceValues?.({ km, mi });
       }
 
-      updateUrl(mode, unit === 'km' ? { km } : { mi });
+      updateUrl(
+        mode,
+        unit === 'km' ? { km } : { mi },
+        mode === 'race' ? time : undefined,
+      );
     }
   }, [
     distanceValues?.km,
@@ -113,6 +125,7 @@ export default function ClientInputs() {
     setUnit,
     setPaceValues,
     setDistanceValues,
+    time,
   ]);
 
   return (
