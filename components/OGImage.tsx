@@ -63,10 +63,9 @@ export default function OGImage({
       backgroundColor: colors.gray[50],
       borderRadius: 100,
       padding: '6px 20px',
-
     }}>
       <FaAward style={{
-        width: 28,
+        width: 26,
         height: 34,
       }} />
       <span>
