@@ -85,6 +85,26 @@ export const convertPaceMiStringToKmString = (mi: string) => {
     : '';
 };
 
+export const getPace = (
+  distanceString: string,
+  timeString: string,
+): string => {
+  const distance = parseFloat(distanceString);
+  const time = convertTimeStringToSeconds(timeString);
+  return !isNaN(time)
+    ? convertSecondsToTimeString(time/distance)
+    : '';
+};
+
+export const getPaceWithUnit = (
+  distanceString: string,
+  timeString: string,
+  unit: Unit,
+): string => {
+  const pace = getPace(distanceString, timeString);
+  return `${pace} minutes/${unit === 'km' ? 'km' : 'mile'}`;
+};
+
 export const initializeUnit = (km?: string, mi?: string): Unit | undefined =>
   Boolean(km)
     ? 'km'

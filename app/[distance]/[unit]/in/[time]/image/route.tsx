@@ -1,9 +1,9 @@
 import OGImage from '@/components/OGImage';
-import { inputLabelForModeUnit } from '@/site/mode';
 import {
-  ParamsDistance,
+  ParamsRace,
   convertDistanceKmStringToMiString,
   convertDistanceMiStringToKmString,
+  getPaceWithUnit,
   unitFromString,
 } from '@/site/unit';
 import { getFonts } from '@/utility/font';
@@ -13,20 +13,33 @@ export const runtime = 'edge';
 
 export async function GET(
   _: Request,
-  { params: { distance, unit: unitFromParams } }: ParamsDistance,
+  { params: {
+    distance,
+    unit: unitFromParams,
+    time: timeFromParams,
+  } }: ParamsRace,
 ) {
   const unit = unitFromString(unitFromParams);
+  const time = decodeURIComponent(timeFromParams);
+  const distanceConverted = unit === 'km'
+    ? convertDistanceKmStringToMiString(distance)
+    : convertDistanceMiStringToKmString(distance);
+  const pace = getPaceWithUnit(distance, time, unit);
+  const paceConverted = getPaceWithUnit(
+    distanceConverted,
+    time,
+    unit === 'km' ? 'mi' : 'km', 
+  );
   return new ImageResponse(
     <OGImage {...{
       unit,
-      valueLeft: unit === 'km'
-        ? distance
-        : convertDistanceMiStringToKmString(distance),
-      valueRight: unit === 'mi'
-        ? distance
-        : convertDistanceKmStringToMiString(distance),
-      labelLeft: inputLabelForModeUnit('distance', 'km'),
-      labelRight: inputLabelForModeUnit('distance', 'mi'),
+      valueLeft: unit === 'km' ? distance : distanceConverted,
+      valueRight: unit === 'km' ? distanceConverted : distance,
+      labelLeft:  unit === 'km' ? pace : paceConverted,
+      labelRight: unit === 'km' ? paceConverted : pace,
+      ...unit === 'km'
+        ? { timeBadgeRight: time }
+        : { timeBadgeLeft: time },
     }} />,
     {
       width: 1000,

@@ -1,5 +1,6 @@
 import { Unit, characterForUnit } from '@/site/unit';
 import { GEIST_MONO_FAMILY } from '@/utility/font';
+import { FaAward } from 'react-icons/fa';
 import colors from 'tailwindcss/colors';
 
 export default function OGImage({
@@ -8,12 +9,16 @@ export default function OGImage({
   valueRight,
   labelLeft,
   labelRight,
+  timeBadgeLeft,
+  timeBadgeRight,
 }: {
   unit?: Unit
   valueLeft?: string
   valueRight?: string
   labelLeft: string
   labelRight: string
+  timeBadgeLeft?: string
+  timeBadgeRight?: string
 }) {
   const renderBox = (text = '00:00', dim: boolean, label: string) =>
     <div style={{
@@ -45,6 +50,30 @@ export default function OGImage({
       </div>
     </div>;
 
+  const renderTimeBadge = (text: string, direction: 'left' | 'right') =>
+    <span style={{
+      display: 'flex',
+      position: 'absolute',
+      alignItems: 'center',
+      gap: 12,
+      top: 0,
+      ...direction === 'left' ? { left: -30 } : { right: -30 },
+      fontSize: 40,
+      color: colors.gray[900],
+      backgroundColor: colors.gray[50],
+      borderRadius: 100,
+      padding: '6px 20px',
+
+    }}>
+      <FaAward style={{
+        width: 28,
+        height: 34,
+      }} />
+      <span>
+        {text}
+      </span>
+    </span>;
+
   return (
     <div
       style={{
@@ -73,13 +102,29 @@ export default function OGImage({
           fontSize: 200,
           fontWeight: 600,
         }}>
-          <span style={{
-            color: unit === 'km' ? colors.gray[50] : colors.gray[900],
-          }}>KM</span>
+          <div style={{
+            display: 'flex',
+            position: 'relative',
+          }}>
+            <span style={{
+              color: unit === 'km' ? colors.gray[50] : colors.gray[900],
+            }}>
+              KM
+            </span>
+            {timeBadgeLeft && renderTimeBadge(timeBadgeLeft, 'left')}
+          </div>
           <span>{characterForUnit(unit)}</span>
-          <span style={{
-            color: unit === 'mi' ? colors.gray[50] : colors.gray[900],
-          }}>MI</span>
+          <div style={{
+            display: 'flex',
+            position: 'relative',
+          }}>
+            <span style={{
+              color: unit === 'mi' ? colors.gray[50] : colors.gray[900],
+            }}>
+              MI
+            </span>
+            {timeBadgeRight && renderTimeBadge(timeBadgeRight, 'right')}
+          </div>
         </div>
         <div style={{ display: 'flex', gap: 30, position: 'relative' }}>
           {renderBox(valueLeft, !valueLeft, labelLeft)}
