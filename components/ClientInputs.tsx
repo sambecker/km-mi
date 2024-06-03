@@ -31,21 +31,12 @@ export default function ClientInputs() {
   const inputRefTime = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (mode === 'race') {
-      if (
-        !inputRefKm.current?.focus &&
-        !inputRefMi.current?.focus
-      ) {
-        inputRefTime.current?.focus();
-      }
-    } else {
-      if (unit === 'km') {
-        inputRefKm.current?.focus();
-      } else if (unit === 'mi') {
-        inputRefMi.current?.focus();
-      }
+    if (unit === 'km') {
+      inputRefKm.current?.focus();
+    } else if (unit === 'mi') {
+      inputRefMi.current?.focus();
     }
-  }, [mode, unit]);
+  }, [unit]);
 
   const onDistancePaceChange = useCallback((
     value: string | undefined,
