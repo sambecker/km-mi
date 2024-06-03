@@ -13,17 +13,17 @@ export default function ClientInput({
   placeholder,
 }: {
   id: string
-  inputRef: RefObject<HTMLInputElement>
+  inputRef?: RefObject<HTMLInputElement>
   label: string
   value?: string,
   isSelected: boolean
-  onChange: (value?: string) => void
-  onFocus: (value?: string) => void
-  onBlur: () => void
+  onChange?: (value?: string) => void
+  onFocus?: (value?: string) => void
+  onBlur?: () => void
   placeholder: string
 }) {
   return (
-    <div className="flex flex-col basis-full gap-2">
+    <div className="flex flex-col basis-full gap-1">
       <div className="flex">
         <input
           id={id}
@@ -31,8 +31,8 @@ export default function ClientInput({
           type="text"
           className="basis-full"
           value={value}
-          onChange={e => onChange(e.target.value)}
-          onFocus={e => onFocus(e.target.value)}
+          onChange={e => onChange?.(e.target.value)}
+          onFocus={e => onFocus?.(e.target.value)}
           onBlur={onBlur}
           placeholder={placeholder}
         />

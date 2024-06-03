@@ -1,6 +1,6 @@
 import ClientContent from '@/components/ClientContent';
 
-export default function Home() {
+export default function DistanceTimeLayout() {
   return (
     <ClientContent />
   );

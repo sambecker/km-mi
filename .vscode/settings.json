@@ -8,5 +8,8 @@
     ".vercel": true,
     "next-env.d.ts": true,
     "node_modules": true
-  }
+  },
+  "cSpell.words": [
+    "headlessui"
+  ]
 }
