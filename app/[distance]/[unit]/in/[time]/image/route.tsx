@@ -33,8 +33,8 @@ export async function GET(
   return new ImageResponse(
     <OGImage {...{
       unit,
-      valueLeft: unit === 'km' ? distance : distanceConverted,
-      valueRight: unit === 'km' ? distanceConverted : distance,
+      valueLeft: `${unit === 'km' ? distance : distanceConverted}km`,
+      valueRight: `${unit === 'km' ? distanceConverted : distance}mi`,
       labelLeft:  unit === 'km' ? pace : paceConverted,
       labelRight: unit === 'km' ? paceConverted : pace,
       ...unit === 'km'
