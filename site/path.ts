@@ -1,3 +1,4 @@
+import { formatTimeString } from '@/utility/number';
 import { DEFAULT_MODE } from './mode';
 import { INITIAL_VALUES, Unit } from './unit';
 
@@ -11,11 +12,11 @@ export const pathForPace = (value: string | undefined, unit: Unit) =>
 
 // RACE: 5/km/in/34:30
 export const pathForRace = (
-  value: string | undefined,
+  distance: string | undefined,
   unit: Unit,
   time = '0:00'
 ) =>
-  value ? `/${pathForDistance(value, unit)}/in/${time}` : '/';
+  distance ? `${pathForDistance(distance, unit)}/in/${time}` : '/';
 
 export const pathForDistanceImage = (value: string | undefined, unit: Unit) =>
   `${pathForDistance(value, unit)}/image`;
@@ -30,11 +31,18 @@ export const pathForRaceImage = (
 ) =>
   `${pathForRace(value, unit, time)}/image`;
 
-export const updateUrlForModeUnit = (
+export const updateUrl = (
   mode = DEFAULT_MODE,
   { km, mi } = INITIAL_VALUES,
+  time?: string,
 ) => {
-  if (Boolean(km)) {
+  if (mode === 'race' && Boolean(time)) {
+    window.history.pushState(
+      { mode, time },
+      '',
+      pathForRace(km || mi, km ? 'km' : 'mi', formatTimeString(time)),
+    );
+  } else if (Boolean(km)) {
     window.history.pushState(
       { mode, km },
       '',

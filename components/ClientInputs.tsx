@@ -6,12 +6,12 @@ import {
   generateDistanceValues,
   generatePaceValues,
 } from '@/site/unit';
-import { updateUrlForModeUnit } from '@/site/path';
+import { updateUrl } from '@/site/path';
 import { useCallback, useEffect, useRef } from 'react';
 import ClientInput from './ClientInput';
 import { formatTimeString } from '@/utility/number';
-import { inputPlaceholderForModeUnit } from '@/site';
-import { DEFAULT_MODE } from '@/site/mode';
+import { TIME_PLACEHOLDER, inputPlaceholderForModeUnit } from '@/site';
+import { DEFAULT_MODE, inputLabelForModeUnit } from '@/site/mode';
 
 export default function ClientInputs() {
   const {
@@ -22,20 +22,27 @@ export default function ClientInputs() {
     setPaceValues,
     distanceValues,
     setDistanceValues,
+    time,
+    setTime,
   } = useAppState();
 
   const inputRefKm = useRef<HTMLInputElement>(null);
   const inputRefMi = useRef<HTMLInputElement>(null);
+  const inputRefTime = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (unit === 'km') {
-      inputRefKm.current?.focus();
-    } else if (unit === 'mi') {
-      inputRefMi.current?.focus();
+    if (mode === 'race') {
+      inputRefTime.current?.focus();
+    } else {
+      if (unit === 'km') {
+        inputRefKm.current?.focus();
+      } else if (unit === 'mi') {
+        inputRefMi.current?.focus();
+      }
     }
-  }, [unit]);
+  }, [mode, unit]);
 
-  const onChange = useCallback((
+  const onDistancePaceChange = useCallback((
     value: string | undefined,
     unit: Unit,
   ) => {
@@ -53,7 +60,7 @@ export default function ClientInputs() {
 
     // Only update the URL if formatted value is valid
     if (valueFormatted) {
-      updateUrlForModeUnit(
+      updateUrl(
         mode,
         unit === 'km'
           ? { km: valueFormatted }
@@ -61,7 +68,18 @@ export default function ClientInputs() {
     }
   }, [mode, setDistanceValues, setPaceValues]);
 
-  const onBlur = useCallback((unit: Unit) => {
+  const onRaceChange = useCallback((value: string | undefined) => {
+    setTime?.(value);
+    updateUrl(
+      mode,
+      unit === 'km'
+        ? { km: distanceValues?.km }
+        : { mi: distanceValues?.mi },
+      value,
+    );
+  }, [distanceValues?.km, distanceValues?.mi, mode, setTime, unit]);
+
+  const onDistancePaceBlur = useCallback((unit: Unit) => {
     if (
       !distanceValues?.km &&
       !distanceValues?.mi &&
@@ -69,7 +87,7 @@ export default function ClientInputs() {
       !paceValues?.mi
     ) {
       setUnit?.(undefined);
-      updateUrlForModeUnit();
+      updateUrl();
     } else {
       const km = mode === 'pace'
         ? formatTimeString(paceValues?.km)
@@ -84,7 +102,7 @@ export default function ClientInputs() {
         setDistanceValues?.({ km, mi });
       }
 
-      updateUrlForModeUnit(mode, unit === 'km' ? { km } : { mi });
+      updateUrl(mode, unit === 'km' ? { km } : { mi });
     }
   }, [
     distanceValues?.km,
@@ -98,47 +116,68 @@ export default function ClientInputs() {
   ]);
 
   return (
-    <div className="flex gap-2">
-      <ClientInput
-        mode={mode}
-        unit="km"
-        inputRef={inputRefKm}
-        value={mode === 'pace'
-          ? paceValues?.km
-          : distanceValues?.km}
-        isSelected={
-          unit === 'km' ||
-          (mode !== 'pace' && Boolean(distanceValues?.km)) ||
-          (mode === 'pace' && Boolean(paceValues?.km))
-        }
-        onChange={km => onChange(km, 'km')}
-        onFocus={km => {
-          setUnit?.('km');
-          updateUrlForModeUnit(mode, { km });
-        }}
-        onBlur={() => onBlur('km')}
-        placeholder={inputPlaceholderForModeUnit(mode, 'km')}
-      />
-      <ClientInput
-        mode={mode}
-        unit="mi"
-        inputRef={inputRefMi}
-        value={mode === 'pace'
-          ? paceValues?.mi
-          : distanceValues?.mi}
-        isSelected={
-          unit === 'mi' ||
-          (mode !== 'pace' && Boolean(distanceValues?.mi)) ||
-          (mode === 'pace' && Boolean(paceValues?.mi))
-        }
-        onChange={mi => onChange(mi, 'mi')}
-        onFocus={mi => {
-          setUnit?.('mi');
-          updateUrlForModeUnit(mode, { mi });
-        }}
-        onBlur={() => onBlur('mi')}
-        placeholder={inputPlaceholderForModeUnit(mode, 'mi')}
-      />
+    <div className="space-y-4">
+      <div className="flex gap-2">
+        <ClientInput
+          id={`${mode}-${unit}`}
+          label={inputLabelForModeUnit(mode, 'km')}
+          inputRef={inputRefKm}
+          value={mode === 'pace'
+            ? paceValues?.km
+            : distanceValues?.km}
+          isSelected={
+            unit === 'km' ||
+            (mode !== 'pace' && Boolean(distanceValues?.km)) ||
+            (mode === 'pace' && Boolean(paceValues?.km))
+          }
+          onChange={km => onDistancePaceChange(km, 'km')}
+          onFocus={km => {
+            setUnit?.('km');
+            updateUrl(mode, { km }, time);
+          }}
+          onBlur={() => onDistancePaceBlur('km')}
+          placeholder={inputPlaceholderForModeUnit(mode, 'km')}
+        />
+        <ClientInput
+          id={`${mode}-${unit}`}
+          label={inputLabelForModeUnit(mode, 'mi')}
+          inputRef={inputRefMi}
+          value={mode === 'pace'
+            ? paceValues?.mi
+            : distanceValues?.mi}
+          isSelected={
+            unit === 'mi' ||
+            (mode !== 'pace' && Boolean(distanceValues?.mi)) ||
+            (mode === 'pace' && Boolean(paceValues?.mi))
+          }
+          onChange={mi => onDistancePaceChange(mi, 'mi')}
+          onFocus={mi => {
+            setUnit?.('mi');
+            updateUrl(mode, { mi }, time);
+          }}
+          onBlur={() => onDistancePaceBlur('mi')}
+          placeholder={inputPlaceholderForModeUnit(mode, 'mi')}
+        />
+      </div>
+      {mode === 'race' &&
+        <ClientInput
+          id={mode}
+          label="race time"
+          inputRef={inputRefTime}
+          value={time}
+          onChange={onRaceChange}
+          isSelected={Boolean(time)}
+          placeholder={TIME_PLACEHOLDER}
+          onFocus={() => {
+            updateUrl(
+              mode,
+              unit === 'km'
+                ? { km: distanceValues?.km }
+                : { mi: distanceValues?.mi },
+              time,
+            );
+          }}
+        />}
     </div>
   );
 }

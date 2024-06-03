@@ -11,8 +11,8 @@ export interface AppState {
   setPaceValues?: Dispatch<SetStateAction<UnitValues | undefined>>
   distanceValues?: UnitValues
   setDistanceValues?: Dispatch<SetStateAction<UnitValues | undefined>>
-  timeValue?: string
-  setTimeValue?: Dispatch<SetStateAction<string | undefined>>
+  time?: string
+  setTime?: Dispatch<SetStateAction<string | undefined>>
 }
 
 export const AppStateContext = createContext<AppState>({});

@@ -14,6 +14,7 @@ export type SiteParams = {
 
 const DISTANCE_PLACEHOLDER_KM = '10';
 const PACE_PLACEHOLDER_KM = '4:00';
+export const TIME_PLACEHOLDER = '20:00';
 
 export const modeFromParams = ({ distance, pace, time }: SiteParams): Mode => {
   if (time && distance) {

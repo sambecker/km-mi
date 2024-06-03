@@ -12,6 +12,7 @@ import { Mode } from '@/site/mode';
 import { useParams, useRouter } from 'next/navigation';
 import { SiteParams, modeFromParams } from '@/site';
 import { pathForDistance, pathForPace } from '@/site/path';
+import { formatTimeString } from '@/utility/number';
 
 export default function AppStateProvider({
   children,
@@ -31,6 +32,9 @@ export default function AppStateProvider({
   const unitFromParams = params.unit
     ? unitFromString(params.unit)
     : undefined;
+  const timeFromParams = params.time
+    ? decodeURIComponent(params.time)
+    : undefined;
 
   const [mode, _setMode] = useState<Mode | undefined>(
     modeFromParams(params)
@@ -48,14 +52,16 @@ export default function AppStateProvider({
     initializeValues(mode, distance, unitFromParams)
   );
 
-  const [timeValue, setTimeValue] = useState<string | undefined>();
+  const [time, setTime] = useState<string | undefined>(
+    formatTimeString(timeFromParams)
+  );
 
   const setMode = useCallback((mode: Mode) => {
     _setMode(mode);
     switch (mode) {
     case 'distance':
       if (!distanceValues?.km || !distanceValues?.mi) {
-        initializeValues(mode, distance, unitFromParams);
+        initializeValues('distance', distance, unitFromParams);
       }
       router.push(pathForDistance(
         unit === 'km' ? distanceValues?.km : distanceValues?.mi,
@@ -64,7 +70,7 @@ export default function AppStateProvider({
       break;
     case 'pace':
       if (!paceValues?.km || !paceValues?.mi) {
-        initializeValues(mode, pace, unitFromParams);
+        initializeValues('pace', pace, unitFromParams);
       }
       router.push(pathForPace(
         unit === 'km' ? paceValues?.km : paceValues?.mi,
@@ -95,8 +101,8 @@ export default function AppStateProvider({
       setPaceValues,
       distanceValues,
       setDistanceValues,
-      timeValue,
-      setTimeValue,
+      time,
+      setTime,
     }}>
       {children}
     </AppStateContext.Provider>
