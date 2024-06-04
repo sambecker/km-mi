@@ -14,21 +14,21 @@
     "@vercel/analytics": "^1.3.1",
     "@vercel/speed-insights": "^1.0.11",
     "geist": "^1.3.0",
-    "next": "15.0.0-canary.7",
-    "react": "19.0.0-beta-26f2496093-20240514",
-    "react-dom": "19.0.0-beta-26f2496093-20240514",
+    "next": "15.0.0-canary.10",
+    "react": "19.0.0-rc.0",
+    "react-dom": "19.0.0-rc.0",
     "react-icons": "^5.2.1",
     "tailwind-merge": "^2.3.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.5",
-    "@testing-library/react": "^15.0.7",
+    "@testing-library/react": "^16.0.0",
     "@types/jest": "^29.5.12",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "@typescript-eslint/eslint-plugin": "^7.11.0",
-    "@typescript-eslint/parser": "^7.11.0",
+    "@types/node": "^20.14.1",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@typescript-eslint/eslint-plugin": "^7.12.0",
+    "@typescript-eslint/parser": "^7.12.0",
     "autoprefixer": "^10.4.19",
     "eslint": "8.57.0",
     "eslint-config-next": "14.2.3",
@@ -36,6 +36,6 @@
     "jest-environment-jsdom": "^29.7.0",
     "postcss": "^8",
     "tailwindcss": "^3.4.3",
-    "typescript": "^5"
+    "typescript": "^5.4.5"
   }
 }
