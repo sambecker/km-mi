@@ -2,22 +2,22 @@
 
 import { useAppState } from '@/state';
 import { characterForUnit } from '@/site/unit';
-import AppHeaderSegment from './AppHeaderSegment';
+import AppUnitSegment from './AppUnitSegment';
 
-export default function AppHeader() {
+export default function AppUnits() {
   const { unit, setUnit } = useAppState();
 
   return (
     <div className="relative flex gap-2 text-8xl font-bold select-none">
-      <AppHeaderSegment
+      <AppUnitSegment
         text="KM"
         shouldFade={unit !== 'km'}
         onClick={() => setUnit?.('km')}
       />
-      <AppHeaderSegment
+      <AppUnitSegment
         text={characterForUnit(unit)}
       />
-      <AppHeaderSegment
+      <AppUnitSegment
         text="MI"
         shouldFade={unit !== 'mi'}
         onClick={() => setUnit?.('mi')}
