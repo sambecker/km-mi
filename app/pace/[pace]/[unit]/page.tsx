@@ -1,4 +1,3 @@
-import AppContent from '@/components/AppContent';
 import { ParamsPace } from '@/site/unit';
 import { Metadata } from 'next';
 import { getMeta } from '@/site/meta';
@@ -10,7 +9,5 @@ export function generateMetadata({
 }
 
 export default function KmPage() {
-  return (
-    <AppContent />
-  );
+  return null;
 }

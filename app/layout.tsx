@@ -6,11 +6,11 @@ import { BASE_URL, DESCRIPTION, TITLE } from '@/site/meta';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import Footer from '@/components/Footer';
-import { ReactNode } from 'react';
 import AppStateProvider from '@/state/AppStateProvider';
 import Header from '@/components/Header';
 
 import './globals.css';
+import AppContent from '@/components/AppContent';
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -34,11 +34,7 @@ export const metadata: Metadata = {
   }],
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: ReactNode;
-}>) {
+export default function RootLayout() {
   return (
     <html lang="en">
       <head>
@@ -60,7 +56,7 @@ export default function RootLayout({
             <AppStateProvider>
               <Header />
               <div className="flex grow items-center">
-                {children}
+                <AppContent />
               </div>
               <Footer />
             </AppStateProvider>
