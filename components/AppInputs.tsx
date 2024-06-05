@@ -122,9 +122,11 @@ export default function AppInputs() {
   return (
     <div className="space-y-4">
       <div className="flex gap-2">
+        {/* KM */}
         <AppInput
           id={`${mode}-${unit}`}
           label={inputLabelForModeUnit(mode, 'km')}
+          tabIndex={1}
           inputRef={inputRefKm}
           value={mode === 'pace'
             ? paceValues?.km
@@ -142,10 +144,14 @@ export default function AppInputs() {
           onBlur={() => onDistancePaceBlur('km')}
           placeholder={inputPlaceholderForModeUnit(mode, 'km')}
         />
+        {/* MI */}
         <AppInput
           id={`${mode}-${unit}`}
           label={inputLabelForModeUnit(mode, 'mi')}
           inputRef={inputRefMi}
+          tabIndex={mode === 'race' && unit === 'km'
+            ? 3
+            : 2}
           value={mode === 'pace'
             ? paceValues?.mi
             : distanceValues?.mi}
@@ -167,6 +173,7 @@ export default function AppInputs() {
         <AppInput
           id={mode}
           label="race time"
+          tabIndex={unit === 'km' ? 2 : 3}
           inputRef={inputRefTime}
           value={time}
           onChange={onRaceChange}

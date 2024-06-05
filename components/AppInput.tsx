@@ -5,6 +5,7 @@ export default function AppInput({
   id,
   inputRef,
   label,
+  tabIndex,
   value = '',
   isSelected,
   onChange,
@@ -15,6 +16,7 @@ export default function AppInput({
   id: string
   inputRef?: RefObject<HTMLInputElement>
   label: string
+  tabIndex?: number
   value?: string,
   isSelected: boolean
   onChange?: (value?: string) => void
@@ -29,6 +31,7 @@ export default function AppInput({
           id={id}
           ref={inputRef}
           type="text"
+          tabIndex={tabIndex}
           className="basis-full"
           value={value}
           onChange={e => onChange?.(e.target.value)}
