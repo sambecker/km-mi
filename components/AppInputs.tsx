@@ -8,12 +8,12 @@ import {
 } from '@/site/unit';
 import { updateUrl } from '@/site/path';
 import { useCallback, useEffect, useRef } from 'react';
-import ClientInput from './ClientInput';
+import AppInput from './AppInput';
 import { formatTimeString } from '@/utility/number';
 import { TIME_PLACEHOLDER, inputPlaceholderForModeUnit } from '@/site';
 import { DEFAULT_MODE, inputLabelForModeUnit } from '@/site/mode';
 
-export default function ClientInputs() {
+export default function AppInputs() {
   const {
     mode = DEFAULT_MODE,
     unit,
@@ -122,7 +122,7 @@ export default function ClientInputs() {
   return (
     <div className="space-y-4">
       <div className="flex gap-2">
-        <ClientInput
+        <AppInput
           id={`${mode}-${unit}`}
           label={inputLabelForModeUnit(mode, 'km')}
           inputRef={inputRefKm}
@@ -142,7 +142,7 @@ export default function ClientInputs() {
           onBlur={() => onDistancePaceBlur('km')}
           placeholder={inputPlaceholderForModeUnit(mode, 'km')}
         />
-        <ClientInput
+        <AppInput
           id={`${mode}-${unit}`}
           label={inputLabelForModeUnit(mode, 'mi')}
           inputRef={inputRefMi}
@@ -164,7 +164,7 @@ export default function ClientInputs() {
         />
       </div>
       {mode === 'race' &&
-        <ClientInput
+        <AppInput
           id={mode}
           label="race time"
           inputRef={inputRefTime}

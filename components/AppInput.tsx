@@ -1,7 +1,7 @@
 import { RefObject } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-export default function ClientInput({
+export default function AppInput({
   id,
   inputRef,
   label,

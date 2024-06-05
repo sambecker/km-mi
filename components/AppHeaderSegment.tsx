@@ -1,6 +1,6 @@
 import { twMerge } from 'tailwind-merge';
 
-export default function ClientHeaderSegment({
+export default function AppHeaderSegment({
   text,
   shouldFade,
   onClick,
