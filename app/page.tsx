@@ -1,7 +1,7 @@
-import ClientContent from '@/components/ClientContent';
+import AppContent from '@/components/AppContent';
 
 export default function Home() {
   return (
-    <ClientContent />
+    <AppContent />
   );
 }
