@@ -8,9 +8,9 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import Footer from '@/components/Footer';
 import AppStateProvider from '@/state/AppStateProvider';
 import Header from '@/components/Header';
+import AppContent from '@/components/AppContent';
 
 import './globals.css';
-import AppContent from '@/components/AppContent';
 
 export const metadata: Metadata = {
   title: TITLE,
