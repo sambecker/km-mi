@@ -10,8 +10,6 @@ import AppStateProvider from '@/state/AppStateProvider';
 import Header from '@/components/Header';
 import AppContent from '@/components/AppContent';
 
-// Comment: Delete me
-
 import './globals.css';
 
 export const metadata: Metadata = {
