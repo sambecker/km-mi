@@ -17,6 +17,9 @@ importers:
       '@vercel/speed-insights':
         specifier: ^1.2.0
         version: 1.2.0(next@16.0.1(@babel/core@7.28.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react@19.2.0)
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       geist:
         specifier: ^1.5.1
         version: 1.5.1(next@16.0.1(@babel/core@7.28.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))

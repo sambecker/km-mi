@@ -24,18 +24,6 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentcolor);
   }
-}
-
-/* Main */
-@utility bg-main { @apply bg-gray-950 }
-@utility text-main { @apply text-gray-50 }
-@utility surface-main { @apply bg-main text-main }
-/* Invert */
-@utility bg-invert { @apply bg-gray-50 }
-@utility text-invert { @apply text-gray-950 }
-@utility surface-invert { @apply bg-invert text-invert }
-
-@layer utility {
   body {
     @apply
       surface-main
@@ -53,3 +41,12 @@
       placeholder:text-gray-800
   }
 }
+
+/* Main */
+@utility bg-main { @apply bg-gray-950 }
+@utility text-main { @apply text-gray-50 }
+@utility surface-main { @apply bg-main text-main }
+/* Invert */
+@utility bg-invert { @apply bg-gray-50 }
+@utility text-invert { @apply text-gray-950 }
+@utility surface-invert { @apply bg-invert text-invert }
