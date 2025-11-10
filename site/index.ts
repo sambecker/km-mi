@@ -31,13 +31,13 @@ export const inputPlaceholderForModeUnit = (
   unit: Unit,
 ) => {
   switch (mode) {
-  case 'pace':
-    return unit === 'km'
-      ? PACE_PLACEHOLDER_KM
-      : convertPaceKmStringToMiString(PACE_PLACEHOLDER_KM);
-  default:
-    return unit === 'km'
-      ? DISTANCE_PLACEHOLDER_KM
-      : convertDistanceKmStringToMiString(DISTANCE_PLACEHOLDER_KM);
+    case 'pace':
+      return unit === 'km'
+        ? PACE_PLACEHOLDER_KM
+        : convertPaceKmStringToMiString(PACE_PLACEHOLDER_KM);
+    default:
+      return unit === 'km'
+        ? DISTANCE_PLACEHOLDER_KM
+        : convertDistanceKmStringToMiString(DISTANCE_PLACEHOLDER_KM);
   }
 };

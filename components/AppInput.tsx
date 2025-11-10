@@ -1,4 +1,4 @@
-import { RefObject } from 'react';
+import { Ref } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 export default function AppInput({
@@ -14,7 +14,7 @@ export default function AppInput({
   placeholder,
 }: {
   id: string
-  inputRef?: RefObject<HTMLInputElement>
+  inputRef?: Ref<HTMLInputElement>
   label: string
   tabIndex?: number
   value?: string,

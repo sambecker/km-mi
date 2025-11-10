@@ -13,8 +13,9 @@ export const runtime = 'edge';
 
 export async function GET(
   _: Request,
-  { params: { distance, unit: unitFromParams } }: ParamsDistance,
+  { params }: ParamsDistance,
 ) {
+  const { distance, unit: unitFromParams } = await params;
   const unit = unitFromString(unitFromParams);
   return new ImageResponse(
     <OGImage {...{

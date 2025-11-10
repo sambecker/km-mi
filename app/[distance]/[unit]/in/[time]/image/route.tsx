@@ -13,12 +13,13 @@ export const runtime = 'edge';
 
 export async function GET(
   _: Request,
-  { params: {
+  { params }: ParamsRace,
+) {
+  const {
     distance,
     unit: unitFromParams,
     time: timeFromParams,
-  } }: ParamsRace,
-) {
+  } = await params;
   const unit = unitFromString(unitFromParams);
   const time = decodeURIComponent(timeFromParams);
   const distanceConverted = unit === 'km'
