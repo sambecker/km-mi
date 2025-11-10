@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "test": "jest --watch"
   },
+  "packageManager": "pnpm@10.20.0",
   "dependencies": {
     "@headlessui/react": "^2.2.9",
     "@vercel/analytics": "^1.5.0",
