@@ -1,9 +1,8 @@
-import fs from 'fs';
-import path from 'path';
-import { cwd } from 'process';
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
 
 export const FONT_GEIST_MONO_FAMILY = 'GeistMono';
-export const FONT_GEIST_MONO_PATH = '/public/fonts';
+export const FONT_GEIST_MONO_PATH = '/fonts';
 export const FONT_GEIST_MONO_WEIGHTS = [
   { name: 'GeistMono-Regular.ttf', weight: 400 },
   { name: 'GeistMono-Semibold.ttf', weight: 600 },
@@ -11,7 +10,7 @@ export const FONT_GEIST_MONO_WEIGHTS = [
 ] as const;
 
 const getFontData = async (name: string) =>
-  fs.readFileSync(path.join(cwd(), `${FONT_GEIST_MONO_PATH}/${name}`));
+  readFile(join(process.cwd(), `${FONT_GEIST_MONO_PATH}/${name}`));
 
 export const getFonts = async () => Promise.all(FONT_GEIST_MONO_WEIGHTS
   .map(({ name, weight }) => getFontData(name)
