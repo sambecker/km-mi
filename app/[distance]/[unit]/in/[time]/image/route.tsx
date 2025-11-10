@@ -9,8 +9,6 @@ import {
 import { getFonts } from '@/utility/font';
 import { ImageResponse } from 'next/og';
 
-export const runtime = 'edge';
-
 export async function GET(
   _: Request,
   { params }: ParamsRace,
