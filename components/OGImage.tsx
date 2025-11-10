@@ -1,5 +1,5 @@
 import { Unit, characterForUnit } from '@/site/unit';
-import { GEIST_MONO_FAMILY } from '@/utility/font';
+import { FONT_GEIST_MONO_FAMILY } from '@/utility/font';
 import { FaAward } from 'react-icons/fa';
 import colors from 'tailwindcss/colors';
 
@@ -85,7 +85,7 @@ export default function OGImage({
         justifyContent: 'center',
         color: colors.gray[50],
         backgroundColor: colors.gray[950],
-        fontFamily: GEIST_MONO_FAMILY,
+        fontFamily: FONT_GEIST_MONO_FAMILY,
         transform: 'scale(1.1)',
       }}
     >
