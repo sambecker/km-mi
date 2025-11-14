@@ -1,0 +1,44 @@
+@import 'tailwindcss'; 
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+  body {
+    @apply
+      surface-main
+  }
+  input[type="text"]{
+    @apply
+      w-12
+      px-2 py-1.5
+      text-2xl font-normal
+      bg-transparent
+      outline-hidden ring-transparent
+      rounded-md border
+      border-gray-800
+      focus:border-gray-50
+      placeholder:text-gray-800
+  }
+}
+
+/* Main */
+@utility bg-main { @apply bg-gray-950 }
+@utility text-main { @apply text-gray-50 }
+@utility surface-main { @apply bg-main text-main }
+/* Invert */
+@utility bg-invert { @apply bg-gray-50 }
+@utility text-invert { @apply text-gray-950 }
+@utility surface-invert { @apply bg-invert text-invert }

@@ -37,46 +37,46 @@ export default function AppStateProvider({
     : undefined;
 
   const [mode, _setMode] = useState<Mode | undefined>(
-    modeFromParams(params)
+    modeFromParams(params),
   );
 
   const [unit, setUnit] = useState<Unit | undefined>(
-    unitFromParams
+    unitFromParams,
   );
 
   const [paceValues, setPaceValues] = useState<UnitValues | undefined>(
-    initializeValues(mode, pace, unitFromParams)
+    initializeValues(mode, pace, unitFromParams),
   );
 
   const [distanceValues, setDistanceValues] = useState<UnitValues | undefined>(
-    initializeValues(mode, distance, unitFromParams)
+    initializeValues(mode, distance, unitFromParams),
   );
 
   const [time, setTime] = useState<string | undefined>(
-    formatTimeString(timeFromParams)
+    formatTimeString(timeFromParams),
   );
 
   const setMode = useCallback((mode: Mode) => {
     _setMode(mode);
     switch (mode) {
-    case 'distance':
-      if (!distanceValues?.km || !distanceValues?.mi) {
-        initializeValues('distance', distance, unitFromParams);
-      }
-      router.push(pathForDistance(
-        unit === 'km' ? distanceValues?.km : distanceValues?.mi,
-        unit ?? 'km',
-      ));
-      break;
-    case 'pace':
-      if (!paceValues?.km || !paceValues?.mi) {
-        initializeValues('pace', pace, unitFromParams);
-      }
-      router.push(pathForPace(
-        unit === 'km' ? paceValues?.km : paceValues?.mi,
-        unit ?? 'km',
-      ));
-      break;
+      case 'distance':
+        if (!distanceValues?.km || !distanceValues?.mi) {
+          initializeValues('distance', distance, unitFromParams);
+        }
+        router.push(pathForDistance(
+          unit === 'km' ? distanceValues?.km : distanceValues?.mi,
+          unit ?? 'km',
+        ));
+        break;
+      case 'pace':
+        if (!paceValues?.km || !paceValues?.mi) {
+          initializeValues('pace', pace, unitFromParams);
+        }
+        router.push(pathForPace(
+          unit === 'km' ? paceValues?.km : paceValues?.mi,
+          unit ?? 'km',
+        ));
+        break;
     }
   }, [
     distance,

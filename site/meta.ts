@@ -48,9 +48,9 @@ export const getMeta = (
   const unit = unitFromString(unitFromParam);
   const time = decodeURIComponent(timeFromParam || '00:00');
   switch (mode) {
-  case 'distance': return getMetaForDistance(value, unit);
-  case 'pace': return getMetaForPace(value, unit);
-  case 'race': return getMetaForRace(value, unit, time);
+    case 'distance': return getMetaForDistance(value, unit);
+    case 'pace': return getMetaForPace(value, unit);
+    case 'race': return getMetaForRace(value, unit, time);
   }
 };
 

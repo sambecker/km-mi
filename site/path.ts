@@ -48,7 +48,7 @@ export const updateUrl = (
       '',
       mode === 'pace'
         ? pathForPace(km, 'km')
-        : pathForDistance(km, 'km')
+        : pathForDistance(km, 'km'),
     );
   } else if (Boolean(mi)) {
     window.history.pushState(
@@ -56,7 +56,7 @@ export const updateUrl = (
       '',
       mode === 'pace'
         ? pathForPace(mi, 'mi')
-        : pathForDistance(mi, 'mi')
+        : pathForDistance(mi, 'mi'),
     );
   } else {
     window.history.pushState(

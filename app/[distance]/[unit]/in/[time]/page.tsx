@@ -2,9 +2,10 @@ import { getMeta } from '@/site/meta';
 import { ParamsRace } from '@/site/unit';
 import { Metadata } from 'next';
 
-export function generateMetadata({
-  params: { distance, unit, time },
-}: ParamsRace): Metadata {
+export async function generateMetadata({
+  params,
+}: ParamsRace): Promise<Metadata> {
+  const { distance, unit, time } = await params;
   return getMeta('race', distance, unit, time);
 }
 

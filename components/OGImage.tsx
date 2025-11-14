@@ -1,7 +1,7 @@
 import { Unit, characterForUnit } from '@/site/unit';
-import { GEIST_MONO_FAMILY } from '@/utility/font';
+import { FONT_GEIST_MONO_FAMILY } from '@/utility/font';
+import clsx from 'clsx/lite';
 import { FaAward } from 'react-icons/fa';
-import colors from 'tailwindcss/colors';
 
 export default function OGImage({
   unit,
@@ -26,44 +26,50 @@ export default function OGImage({
       flexDirection: 'column',
       gap: 14,
     }}>
-      <div style={{
-        display: 'flex',
-        width: 310,
-        padding: '20px 24px 22px 24px',
-        lineHeight: 1,
-        border: '2px solid',
-        borderRadius: 12,
-        fontSize: 50,
-        fontWeight: 500,
-        borderColor: colors.gray[800],
-        color: dim ? colors.gray[800] : colors.gray[50],
-      }}>
+      <div
+        style={{
+          display: 'flex',
+          width: 310,
+          padding: '20px 24px 22px 24px',
+          lineHeight: 1,
+          borderRadius: 12,
+          fontSize: 50,
+          fontWeight: 500,
+        }}
+        tw={clsx(
+          dim ? 'text-gray-800' : 'text-gray-50',
+          'border-[2px] border-gray-800',
+        )}
+      >
         {text ?? '00:00'}
       </div>
-      <div style={{
-        fontSize: 26,
-        fontWeight: 600,
-        color: dim ? colors.gray[800] : colors.gray[50],
-        paddingLeft: 24,
-      }}>
+      <div
+        style={{
+          fontSize: 26,
+          fontWeight: 600,
+          paddingLeft: 24,
+        }}
+        tw={dim ? 'text-gray-800' : 'text-gray-50'}
+      >
         {label}
       </div>
     </div>;
 
   const renderTimeBadge = (text: string, direction: 'left' | 'right') =>
-    <span style={{
-      display: 'flex',
-      position: 'absolute',
-      alignItems: 'center',
-      gap: 12,
-      top: 0,
-      ...direction === 'left' ? { left: -30 } : { right: -30 },
-      fontSize: 40,
-      color: colors.gray[900],
-      backgroundColor: colors.gray[50],
-      borderRadius: 100,
-      padding: '6px 20px',
-    }}>
+    <span
+      style={{
+        display: 'flex',
+        position: 'absolute',
+        alignItems: 'center',
+        gap: 12,
+        top: 0,
+        ...direction === 'left' ? { left: -30 } : { right: -30 },
+        fontSize: 40,
+        borderRadius: 100,
+        padding: '6px 20px',
+      }}
+      tw="text-gray-900 bg-gray-50"
+    >
       <FaAward style={{
         width: 26,
         height: 34,
@@ -76,18 +82,18 @@ export default function OGImage({
   return (
     <div
       style={{
+        display: 'flex',
         height: '100%',
         width: '100%',
-        display: 'flex',
         gap: 20,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        color: colors.gray[50],
-        backgroundColor: colors.gray[950],
-        fontFamily: GEIST_MONO_FAMILY,
+        fontFamily: FONT_GEIST_MONO_FAMILY,
         transform: 'scale(1.1)',
       }}
+      // 950 colors not accessible via "tw"
+      tw="text-gray-50 bg-[#030712]"
     >
       <div style={{
         display: 'flex',
@@ -105,9 +111,9 @@ export default function OGImage({
             display: 'flex',
             position: 'relative',
           }}>
-            <span style={{
-              color: unit === 'km' ? colors.gray[50] : colors.gray[900],
-            }}>
+            <span tw={unit === 'km'
+              ? 'text-gray-50'
+              : 'text-gray-900'}>
               KM
             </span>
             {timeBadgeLeft && renderTimeBadge(timeBadgeLeft, 'left')}
@@ -117,9 +123,9 @@ export default function OGImage({
             display: 'flex',
             position: 'relative',
           }}>
-            <span style={{
-              color: unit === 'mi' ? colors.gray[50] : colors.gray[900],
-            }}>
+            <span tw={unit === 'mi'
+              ? 'text-gray-50'
+              : 'text-gray-900'}>
               MI
             </span>
             {timeBadgeRight && renderTimeBadge(timeBadgeRight, 'right')}

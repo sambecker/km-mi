@@ -14,25 +14,25 @@ export type Unit = 'km' | 'mi';
 export type UnitValues = Partial<Record<Unit, string>>;
 
 export type ParamsDistance = {
-  params: {
+  params: Promise<{
     distance: string
     unit: string
-  }
+  }>
 }
 
 export type ParamsPace = {
-  params: {
+  params: Promise<{
     pace: string
     unit: string
-  }
+  }>
 }
 
 export type ParamsRace = {
-  params: {
+  params: Promise<{
     distance: string
     unit: string
     time: string
-  }
+  }>
 }
 
 export const INITIAL_VALUES: UnitValues = { km: '', mi: '' };
@@ -42,12 +42,12 @@ export const unitFromString = (unit: string): Unit =>
 
 export const characterForUnit = (unit?: Unit) => {
   switch (unit) {
-  case 'km':
-    return '→';
-  case 'mi':
-    return '←';
-  default:
-    return '/';
+    case 'km':
+      return '→';
+    case 'mi':
+      return '←';
+    default:
+      return '/';
   }
 };
 
@@ -118,11 +118,11 @@ export const initializeValues = (
   unit: Unit = 'km',
 ): UnitValues => {
   switch (mode) {
-  case 'distance':
-  case 'race':
-    return generateDistanceValues(value, unit);
-  case 'pace':
-    return generatePaceValues(value, unit);
+    case 'distance':
+    case 'race':
+      return generateDistanceValues(value, unit);
+    case 'pace':
+      return generatePaceValues(value, unit);
   }
 };
 

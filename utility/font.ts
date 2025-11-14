@@ -1,34 +1,24 @@
-export const GEIST_MONO_FAMILY = 'GeistMono';
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
 
-const parseFontResponse = (res: Response, weight: number) =>
-  res.arrayBuffer()
+export const FONT_GEIST_MONO_FAMILY = 'GeistMono';
+
+const FONT_GEIST_MONO_PATH = '/public/fonts';
+const FONT_GEIST_MONO_WEIGHTS = [
+  { name: 'GeistMono-Regular.ttf', weight: 400 },
+  { name: 'GeistMono-SemiBold.ttf', weight: 600 },
+  { name: 'GeistMono-Bold.ttf', weight: 700 },
+] as const;
+
+const getFontData = async (name: string) =>
+  readFile(join(process.cwd(), `${FONT_GEIST_MONO_PATH}/${name}`));
+
+export const getFonts = async () => Promise.all(FONT_GEIST_MONO_WEIGHTS
+  .map(({ name, weight }) => getFontData(name)
     .then(data => ({
-      name: GEIST_MONO_FAMILY,
+      name: FONT_GEIST_MONO_FAMILY,
       data,
       weight,
       style: 'normal',
-    } as const));
-
-export const getGeistMonoBold = () => fetch(new URL(
-  '../public/fonts/geist-mono/GeistMono-Bold.ttf',
-  import.meta.url
-))
-  .then(res => parseFontResponse(res, 600));
-
-export const getGeistMonoSemiBold = () => fetch(new URL(
-  '../public/fonts/geist-mono/GeistMono-SemiBold.ttf',
-  import.meta.url
-))
-  .then(res => parseFontResponse(res, 500));
-
-export const getGeistMonoRegular = () => fetch(new URL(
-  '../public/fonts/geist-mono/GeistMono-Regular.ttf',
-  import.meta.url
-))
-  .then(res => parseFontResponse(res, 400));
-
-export const getFonts = () => Promise.all([
-  getGeistMonoBold(),
-  getGeistMonoSemiBold(),
-  getGeistMonoRegular(),
-] as any);
+    } as const))),
+);
