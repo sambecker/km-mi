@@ -6,7 +6,7 @@ import {
   convertDistanceMiStringToKmString,
   unitFromString,
 } from '@/site/unit';
-import { getFonts } from '@/utility/font';
+import { getFonts, listFonts, listPublic, listRoot } from '@/utility/font';
 import { ImageResponse } from 'next/og';
 
 export async function GET(
@@ -15,6 +15,12 @@ export async function GET(
 ) {
   const { distance, unit: unitFromParams } = await params;
   const unit = unitFromString(unitFromParams);
+  console.log('Listing root');
+  await listRoot();
+  console.log('Listing public');
+  await listPublic();
+  console.log('Listing fonts');
+  await listFonts();
   return new ImageResponse(
     <OGImage {...{
       unit,
