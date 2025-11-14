@@ -6,7 +6,7 @@ export const FONT_GEIST_MONO_FAMILY = 'GeistMono';
 const FONT_GEIST_MONO_PATH = '/public/fonts';
 const FONT_GEIST_MONO_WEIGHTS = [
   { name: 'GeistMono-Regular.ttf', weight: 400 },
-  { name: 'GeistMono-Semibold.ttf', weight: 600 },
+  { name: 'GeistMono-SemiBold.ttf', weight: 600 },
   { name: 'GeistMono-Bold.ttf', weight: 700 },
 ] as const;
 
